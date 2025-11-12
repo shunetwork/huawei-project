@@ -1,0 +1,24 @@
+DHCP-Server：
+
+sys
+user-interface vty 0 4
+authentication-mode password
+set authentication password cipher huawei
+user privilege level 15
+idle-timeout 10 0
+protocol inbound all
+quit
+quit
+#
+save
+
+
+R2:
+
+sys
+int g0/0/0
+nat static protocol tcp global 61.128.1.101 23 inside 192.168.50.1 23
+quit
+quit
+#
+save

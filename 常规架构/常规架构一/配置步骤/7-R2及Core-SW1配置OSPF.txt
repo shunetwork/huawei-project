@@ -1,0 +1,28 @@
+R2：
+
+system
+int g0/0/0
+ip add 61.128.1.100 24
+quit
+
+ip route-static 0.0.0.0 0.0.0.0 61.128.1.200
+
+ospf 1
+default-route-advertise
+ar 0
+network 100.1.1.0 0.0.0.255
+quit
+quit
+#
+save
+
+Core-SW1：
+
+system
+ospf 1
+ar 0
+network 0.0.0.0 0.0.0.0
+quit
+quit
+#
+save

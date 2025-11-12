@@ -1,0 +1,42 @@
+R1：
+
+system-view
+sysname R1
+int g0/0/1.30
+dot1q termination vid 30
+ip add 192.168.30.254 24
+arp broadcast enable
+quit
+
+int g0/0/1.40
+dot1q termination vid 40
+ip add 192.168.40.254 24
+arp broadcast enable
+quit
+quit
+#
+save
+
+Access-SW4：
+
+system-view
+sysname Access-SW4
+vlan batch 30 40
+
+int g0/0/1
+port link-type trunk
+port trunk allow-pass vlan all
+quit
+
+int g0/0/2
+port link-type access
+port default vlan 30
+quit
+
+int g0/0/3
+port link-type access
+port default vlan 40
+quit
+quit
+#
+save

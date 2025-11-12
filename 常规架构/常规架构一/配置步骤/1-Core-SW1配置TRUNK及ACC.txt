@@ -1,0 +1,22 @@
+
+vlan batch 10 20 50 100
+int Eth-Trunk 1
+trunkport g0/0/2
+trunkport g0/0/3
+port link-type trunk
+port trunk allow-pass vlan all
+quit
+
+int Eth-Trunk 2
+trunkport g0/0/4
+trunkport g0/0/5
+port link-type trunk
+port trunk allow-pass vlan all
+quit
+#
+
+int g0/0/6
+port link-type access
+port default vlan 50
+quit
+#

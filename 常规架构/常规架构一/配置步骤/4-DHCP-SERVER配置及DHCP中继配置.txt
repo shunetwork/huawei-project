@@ -1,0 +1,41 @@
+DHCP-Server：
+
+system-view
+dhcp enable
+ip pool Vlan10
+network 192.168.10.0 mask 24
+gateway-list 192.168.10.254
+quit
+
+
+ip pool Vlan20
+network 192.168.20.0 mask 24
+gateway-list 192.168.20.254
+quit
+
+ip route-static 0.0.0.0 0.0.0.0 192.168.50.254
+
+int g0/0/0
+dhcp select global
+quit
+quit
+#
+save
+
+
+Core-SW1：
+
+system-view
+dhcp enable
+int vlan 10
+dhcp select relay
+dhcp relay server-ip 192.168.50.1
+quit
+
+int vlan 20
+dhcp select relay
+dhcp relay server-ip 192.168.50.1
+quit
+quit
+#
+save

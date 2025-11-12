@@ -1,0 +1,41 @@
+Access-SW2：
+
+vlan batch 10 20 50
+
+int Eth-Trunk 1
+trunkport e0/0/1
+trunkport e0/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+quit
+#
+
+int e0/0/3
+port link-type access
+port default vlan 10
+quit
+#
+
+Access-SW3：
+
+system-view
+sysname Access-SW3
+vlan batch 10 20 50
+
+int Eth-Trunk 2
+trunkport g0/0/1
+trunkport g0/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+quit
+#
+
+
+int e0/0/3
+port link-type access
+port default vlan 20
+undo shut
+quit
+quit
+#
+save

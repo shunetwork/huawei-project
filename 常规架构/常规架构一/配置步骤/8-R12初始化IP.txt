@@ -1,0 +1,18 @@
+R12£º
+
+sys
+sysname R12
+int lo0
+ip add 8.8.8.8 24
+quit
+
+int g0/0/0
+ip add 28.9.4.200 24
+quit
+
+int g0/0/1
+ip add 61.128.1.200 24
+quit
+quit
+#
+save

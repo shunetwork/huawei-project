@@ -1,0 +1,26 @@
+R1:
+
+system-view
+dhcp enable
+
+ip pool VLAN30
+network 192.168.30.0 mask 255.255.255.0
+gateway-list 192.168.30.254
+excluded-ip-address 192.168.30.1 192.168.30.10
+
+ip pool VLAN40
+network 192.168.40.0 mask 255.255.255.0
+gateway-list 192.168.40.254
+excluded-ip-address 192.168.40.1 192.168.40.10
+quit
+
+interface GigabitEthernet0/0/1.30
+ dhcp select global
+ quit
+
+interface GigabitEthernet0/0/1.40
+ dhcp select global
+ quit
+quit
+#
+save

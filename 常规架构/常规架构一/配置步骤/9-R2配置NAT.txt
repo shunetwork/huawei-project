@@ -1,0 +1,13 @@
+R2：
+
+sys
+acl 2000
+rule permit source 192.168.0.0 0.0.255.255
+quit
+
+int g0/0/0
+nat outbound 2000
+quit
+quit
+#
+save
