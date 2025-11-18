@@ -1,0 +1,56 @@
+
+配置聚合口的vlan以及vlanif
+防火墙
+
+vlan batch 100 101
+interface Eth-Trunk1
+ port link-type trunk
+ port trunk allow-pass vlan 100
+interface Eth-Trunk2
+ port link-type trunk
+ port trunk allow-pass vlan 101
+ q
+
+
+interface Vlanif100
+ ip address 10.0.100.1 255.255.255.0
+ q
+#
+interface Vlanif101
+ ip address 10.0.101.1 255.255.255.0
+ q
+quit
+#
+save
+
+
+
+SW1、2
+
+# SW1
+sys
+vlan batch 100
+interface Eth-Trunk1
+ port link-type trunk
+ port trunk allow-pass vlan 100
+ q
+interface Vlanif100
+ ip address 10.0.100.2 255.255.255.0
+ q
+q
+#
+save
+
+# SW2
+sys
+vlan batch 101
+interface Eth-Trunk1
+ port link-type trunk
+ port trunk allow-pass vlan 101
+ q
+interface Vlanif101
+ ip address 10.0.101.2 255.255.255.0
+ q
+q
+#
+save

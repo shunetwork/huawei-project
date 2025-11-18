@@ -1,0 +1,31 @@
+SW1:
+
+sys
+interface GigabitEthernet0/0/6
+	port link-type access	
+	port default vlan 200
+	quit
+quit
+#
+save
+
+AC1：
+
+sys
+sys AC1
+vlan batch 10 20 200
+interface GigabitEthernet0/0/1
+ port link-type access
+ port default vlan 200
+dhcp enable
+interface Vlanif200
+ ip address 10.0.200.254 255.255.255.0
+ dhcp select interface
+ quit
+quit
+#
+save
+
+
+
+

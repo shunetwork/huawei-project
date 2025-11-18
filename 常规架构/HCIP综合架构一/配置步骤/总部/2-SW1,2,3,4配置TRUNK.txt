@@ -1,0 +1,22 @@
+SW1,2,3,4:
+
+# SW1和SW2上
+sys
+port-group group-member g0/0/3 to g0/0/5
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40 200
+quit
+quit
+#
+save
+
+
+# SW3和SW4上
+sys
+port-group group-member g0/0/1 to g0/0/3
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40 200
+quit
+quit
+#
+save

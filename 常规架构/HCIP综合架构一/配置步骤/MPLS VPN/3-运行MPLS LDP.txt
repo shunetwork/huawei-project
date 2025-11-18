@@ -1,0 +1,65 @@
+# PE1
+sys
+mpls lsr-id 1.1.1.1
+mpls
+mpls ldp
+int g0/0/2
+	mpls
+	mpls ldp
+int g4/0/0
+	mpls
+	mpls ldp
+	quit
+quit
+save
+
+# P
+sys
+mpls lsr-id 2.2.2.2
+mpls
+mpls ldp
+int g0/0/0
+	mpls
+	mpls ldp
+int g0/0/1
+	mpls
+	mpls ldp
+int g0/0/2
+	mpls
+	mpls ldp
+	quit
+quit
+save
+
+# PE2
+sys
+mpls lsr-id 3.3.3.3
+mpls
+mpls ldp
+int g0/0/0
+	mpls
+	mpls ldp
+int g0/0/2
+	mpls
+	mpls ldp
+	quit
+quit
+save
+
+# RR
+sys
+mpls lsr-id 4.4.4.4
+mpls
+mpls ldp
+int g0/0/0
+	mpls
+	mpls ldp
+int g0/0/1
+	mpls
+	mpls ldp
+int g0/0/2
+	mpls
+	mpls ldp
+	quit
+quit
+save

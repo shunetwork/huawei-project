@@ -1,0 +1,41 @@
+
+AC1:
+
+sys
+capwap source interface Vlanif 200
+wlan
+	ap-id 0 ap-mac 00e0-fcec-4090
+	ap-name AP1
+	q	
+	q
+
+wlan
+	ssid-profile name 1
+	ssid hcip-datacom
+	q
+	security-profile name 1
+	security wpa-wpa2 psk pass-phrase huawei123 aes
+	q
+
+
+vlan pool 1
+	vlan 10 20
+	q
+
+wlan
+	vap-profile name 1
+	service-vlan vlan-pool 1
+	ssid-profile 1
+	security-profile 1
+	q
+q
+
+wlan
+	ap-group name 1
+	vap-profile 1 wlan 1 radio 0
+	q
+	ap-id 0
+	ap-group 1
+	q
+q
+

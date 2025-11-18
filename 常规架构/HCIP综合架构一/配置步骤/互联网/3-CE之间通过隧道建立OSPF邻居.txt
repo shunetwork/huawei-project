@@ -1,0 +1,55 @@
+1、 CE上配置默认路由
+
+# CE1
+ip route-static 0.0.0.0 0 64.1.1.1
+# CE2
+ip route-static 0.0.0.0 0 65.1.1.1 
+# CE3
+ip route-static 0.0.0.0 0 68.1.1.1
+
+2、配置CE1与CE3之间的GRE隧道
+
+# CE1
+sys
+interface Tunnel0/0/0
+ ip address 192.168.1.1 255.255.255.0 
+ tunnel-protocol gre
+ source 64.1.1.2
+ destination 68.1.1.2
+ quit
+quit
+save
+
+# CE3
+sys
+interface Tunnel0/0/0
+ ip address 192.168.1.2 255.255.255.0 
+ tunnel-protocol gre
+ source 68.1.1.2
+ destination 64.1.1.2
+ quit
+quit
+save
+
+3、将接口宣告到OSPF
+# CE1
+sys
+ospf 1  
+ default-route-advertise
+ area 0.0.0.0 
+  network 192.168.1.0 0.0.0.255
+  quit
+ quit
+quit
+save
+
+ # CE3
+sys
+ospf 1 
+default-route-advertise
+ area 0.0.0.0 
+  network 192.168.1.0 0.0.0.255
+  quit
+ quit
+quit
+save

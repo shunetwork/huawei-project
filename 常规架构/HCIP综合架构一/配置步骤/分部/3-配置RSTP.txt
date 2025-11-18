@@ -1,0 +1,24 @@
+# SW7
+sys
+stp mode rstp
+stp root primary 
+quit
+save
+
+# SW8
+sys
+stp mode rstp
+int e0/0/1
+ stp edged-port enable
+ quit
+quit
+save
+
+# SW9
+sys
+stp mode rstp
+int e0/0/1
+ stp edged-port enable
+ quit
+quit
+save

@@ -1,0 +1,9 @@
+# SW 7 8 9
+
+sys
+un in en
+sys SW9
+vlan batch 50 60
+quit
+#
+save

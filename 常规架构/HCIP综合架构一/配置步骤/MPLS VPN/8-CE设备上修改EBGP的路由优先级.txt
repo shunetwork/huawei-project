@@ -1,0 +1,9 @@
+#在CE设备上修改EBGP的路由优先级
+
+
+# CE1、2命令相同
+bgp 200
+	preference 7 255 255
+# CE3
+bgp 300
+	preference 7 255 255

@@ -1,0 +1,71 @@
+# PE1
+sys
+isis
+	network-entity 49.0123.0000.0000.0001.00
+	is-level level-2
+	cost-style wide
+	q
+int l0
+	isis enable
+int g0/0/2
+	isis enable
+int g4/0/0
+	isis enable
+	q
+quit
+save
+
+# P
+sys
+isis
+	network-entity 49.0123.0000.0000.0002.00
+	is-level level-2
+	cost-style wide
+	q
+int l0
+	isis enable
+int g0/0/0
+	isis enable
+int g0/0/1
+	isis enable
+int g0/0/2
+	isis enable
+	q
+quit
+save
+
+# PE2
+sys
+isis
+	network-entity 49.0123.0000.0000.0003.00
+	is-level level-2
+	cost-style wide
+	q
+int l0
+	isis enable
+int g0/0/0
+	isis enable
+int g0/0/2
+	isis enable
+	q
+quit
+save
+
+# RR
+sys
+isis
+	network-entity 49.0123.0000.0000.0004.00
+	is-level level-2
+	cost-style wide
+	q
+int l0
+	isis enable
+int g0/0/0
+	isis enable
+int g0/0/1
+	isis enable
+int g0/0/2
+	isis enable
+	q
+quit
+save

@@ -1,0 +1,24 @@
+# SW3
+sys
+interface GigabitEthernet0/0/4
+ port link-type trunk 
+ port trunk pvid vlan 200
+ port trunk allow-pass vlan 10 20 200
+ quit
+quit
+#
+save
+ 
+# SW4
+sys
+interface GigabitEthernet0/0/4
+ port link-type access
+ port default vlan 30
+ quit
+interface GigabitEthernet0/0/5
+ port link-type access
+ port default vlan 40
+ quit
+quit
+#
+save

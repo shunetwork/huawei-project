@@ -1,0 +1,14 @@
+SW7:
+
+sys
+dhcp enable 
+interface Vlanif50
+ ip address 10.0.50.254 255.255.255.0
+ dhcp select interface
+ quit
+interface Vlanif60
+ ip address 10.0.60.254 255.255.255.0
+ dhcp select interface
+ quit
+quit
+save

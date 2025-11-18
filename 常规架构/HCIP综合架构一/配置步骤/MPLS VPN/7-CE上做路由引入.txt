@@ -1,0 +1,43 @@
+CE1与CE2（配置命令相同）
+
+sys
+ip ip-prefix 5060 permit 10.0.50.0 24
+ip ip-prefix 5060 permit 10.0.60.0 24
+	route-policy o2b deny node 10
+		if-match ip-prefix 5060
+		q
+		route-policy o2b permit node 20
+	q
+	bgp 200
+		import-route ospf 1 route-policy o2b
+	ospf
+		import-route bgp
+		q
+q
+
+save
+
+CE3
+
+sys
+ip ip-prefix 1234 permit 10.0.10.0 24
+ip ip-prefix 1234 permit 10.0.20.0 24
+ip ip-prefix 1234 permit 10.0.30.0 24
+ip ip-prefix 1234 permit 10.0.40.0 24
+route-policy o2b deny node 10
+if-match ip-prefix 1234
+q
+route-policy o2b permit node 20
+q
+bgp 300
+import-route ospf 1 route-policy o2b
+ospf
+import-route bgp
+q
+save
+
+
+
+# 查看路由信息
+dis ip routing-table 
+dis ip routing-table 10.0.50.0 verbose

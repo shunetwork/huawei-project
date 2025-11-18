@@ -1,0 +1,54 @@
+# CE1、2、3（配置都一样）
+sys
+acl number 2000  
+	rule permit source any
+	q
+interface GigabitEthernet0/0/0
+	nat outbound 2000
+	quit
+quit
+save
+
+FW1
+
+防火墙FW1
+
+sys
+# 创建地址集
+ip address-set 1234 type group
+ address 0 10.0.10.0 mask 24
+ address 1 10.0.20.0 mask 24
+ address 2 10.0.30.0 mask 24
+ address 3 10.0.40.0 mask 24
+ q
+ip address-set 56 type group
+ address 0 10.0.50.0 mask 24
+ address 1 10.0.60.0 mask 24
+ q
+
+security-policy
+ # 公司总部与分公司互访
+ rule name P_T2U_1234_56
+  source-zone trust
+  destination-zone untrust
+  source-address address-set 1234
+  destination-address address-set 56
+  action permit
+  q
+ rule name P_U2T_56_1234
+  source-zone untrust
+  destination-zone trust
+  source-address address-set 56
+  destination-address address-set 1234
+  action permit
+  q
+ # 公司总部内访问互联网
+ rule name P_T2U_1234_Internet
+  source-zone trust
+  destination-zone untrust
+  source-address address-set 1234
+  action permit
+  q
+quit
+quit
+save

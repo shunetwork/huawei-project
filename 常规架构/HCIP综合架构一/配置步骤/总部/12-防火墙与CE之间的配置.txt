@@ -1,0 +1,72 @@
+配置防火墙的上行接口，并允许OSPF
+
+# 清除原有的默认配置，并配置IP地址
+int g0/0/0
+    undo ip binding vpn-instance default
+    ip add 10.0.11.1 24
+    q
+
+interface GigabitEthernet1/0/0
+ ip address 10.0.12.1 255.255.255.0
+ q
+
+# 划分区域
+# 先将g0/0/0移出trust区域
+
+firewall zone trust
+    undo add interface g0/0/0
+    q
+
+firewall zone untrust
+ add interface GigabitEthernet0/0/0
+ add interface GigabitEthernet1/0/0
+ q
+
+配置CE1的IP
+
+sys
+sys CE1
+int g0/0/0
+ip add 64.1.1.2 24
+int g0/0/1
+ip add 66.1.1.2 24
+int g0/0/2
+ip add 10.0.11.2 24
+q
+q
+#
+save
+
+配置CE2的IP
+
+sys
+sys CE2
+int g0/0/0
+ip add 65.1.1.2 24
+int g0/0/1
+ip add 67.1.1.2 24
+int g0/0/2
+ip add 10.0.12.2 24
+q
+q
+#
+save
+
+运行OSPF
+
+# FW1（总公司的SW1、SW2、FW1、以及CE1和CE2的g0/0/2都运行OSPF，且都在区域0中）
+ospf 1
+ area 0.0.0.0
+  network 10.0.11.0 0.0.0.255
+  network 10.0.12.0 0.0.0.255
+
+# CE1
+ospf 1 
+ area 0.0.0.0 
+  network 10.0.11.0 0.0.0.255 
+
+# CE2
+ospf 1 
+ area 0.0.0.0 
+  network 10.0.12.0 0.0.0.255 
+CE与公网之间不需要跑OSPF，可以将对应的接口设置为静默接口。

@@ -1,0 +1,73 @@
+
+防火墙上配置IP地址池
+
+ip pool vlan10
+ gateway-list 10.0.10.254
+ network 10.0.10.0 mask 255.255.255.0
+ip pool vlan20
+ gateway-list 10.0.20.254
+ network 10.0.20.0 mask 255.255.255.0
+ip pool vlan30
+ gateway-list 10.0.30.254
+ network 10.0.30.0 mask 255.255.255.0
+ip pool vlan40
+ gateway-list 10.0.40.254
+ network 10.0.40.0 mask 255.255.255.0
+ q
+
+防火墙上开启DHCP
+
+dhcp enable 
+interface Vlanif100
+ dhcp select global
+interface Vlanif101
+ dhcp select global
+防火墙上将vlanif100和101配置到trust区域
+
+firewall zone trust
+ add interface Vlanif100
+ add interface Vlanif101
+SW1和SW2上配置DHCP中继
+
+# SW1
+
+sys
+dhcp enable
+interface Vlanif10
+ dhcp select relay
+ dhcp relay server-ip 10.0.100.1
+interface Vlanif20
+ dhcp select relay
+ dhcp relay server-ip 10.0.100.1
+interface Vlanif30
+ dhcp select relay
+ dhcp relay server-ip 10.0.100.1
+interface Vlanif40
+ dhcp select relay
+ dhcp relay server-ip 10.0.100.1
+ q
+q
+#
+save
+
+
+# SW2
+
+sys
+dhcp enable
+interface Vlanif10
+ dhcp select relay
+ dhcp relay server-ip 10.0.101.1
+interface Vlanif20
+ dhcp select relay
+ dhcp relay server-ip 10.0.101.1
+interface Vlanif30
+ dhcp select relay
+ dhcp relay server-ip 10.0.101.1
+interface Vlanif40
+ dhcp select relay
+ dhcp relay server-ip 10.0.101.1
+ q
+q
+#
+save

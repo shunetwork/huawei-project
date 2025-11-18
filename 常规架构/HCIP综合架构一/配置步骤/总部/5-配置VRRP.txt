@@ -1,0 +1,41 @@
+# SW1上
+sys
+interface Vlanif10
+ ip address 10.0.10.252 255.255.255.0
+ vrrp vrid 1 virtual-ip 10.0.10.254
+ vrrp vrid 1 priority 120
+interface Vlanif20
+ ip address 10.0.20.252 255.255.255.0
+ vrrp vrid 2 virtual-ip 10.0.20.254
+ vrrp vrid 2 priority 120
+interface Vlanif30
+ ip address 10.0.30.252 255.255.255.0
+ vrrp vrid 3 virtual-ip 10.0.30.254
+interface Vlanif40
+ ip address 10.0.40.252 255.255.255.0
+ vrrp vrid 4 virtual-ip 10.0.40.254
+ quit
+quit
+#
+save
+
+# SW2上
+sys
+interface Vlanif10
+ ip address 10.0.10.253 255.255.255.0
+ vrrp vrid 1 virtual-ip 10.0.10.254
+interface Vlanif20
+ ip address 10.0.20.253 255.255.255.0
+ vrrp vrid 2 virtual-ip 10.0.20.254
+interface Vlanif30
+ ip address 10.0.30.253 255.255.255.0
+ vrrp vrid 3 virtual-ip 10.0.30.254
+ vrrp vrid 3 priority 120
+interface Vlanif40
+ ip address 10.0.40.253 255.255.255.0
+ vrrp vrid 4 virtual-ip 10.0.40.254
+ vrrp vrid 4 priority 120
+  quit
+quit
+#
+save

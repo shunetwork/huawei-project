@@ -1,0 +1,52 @@
+# PE1
+sys
+    bgp 100
+     undo default ipv4-unicast
+     peer 3.3.3.3 as-number 100 
+     peer 3.3.3.3 connect-interface LoopBack0
+     peer 4.4.4.4 as-number 100 
+     peer 4.4.4.4 connect-interface LoopBack0
+     # 
+     ipv4-family vpnv4
+        peer 3.3.3.3 enable
+        peer 4.4.4.4 enable
+        quit
+    quit
+quit
+save
+
+# PE2
+sys
+    bgp 100
+     undo default ipv4-unicast
+     peer 1.1.1.1 as-number 100 
+     peer 1.1.1.1 connect-interface LoopBack0
+     peer 4.4.4.4 as-number 100 
+     peer 4.4.4.4 connect-interface LoopBack0
+     # 
+     ipv4-family vpnv4
+        peer 1.1.1.1 enable
+        peer 4.4.4.4 enable
+     quit
+    quit
+quit
+save
+
+# RR
+sys
+    bgp 100
+     undo default ipv4-unicast
+     group ibgp internal
+     peer ibgp connect-interface LoopBack0
+     peer 1.1.1.1 group ibgp 
+     peer 3.3.3.3 group ibgp 
+     # 
+     ipv4-family vpnv4
+        peer ibgp enable
+        peer 1.1.1.1 group ibgp 
+        peer 3.3.3.3 group ibgp 
+        undo policy vpn-target
+        quit
+     quit
+quit
+save

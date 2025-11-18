@@ -1,0 +1,43 @@
+# CE2
+sys
+interface Tunnel0/0/0
+ ip address 192.168.2.1 255.255.255.0 
+ tunnel-protocol gre
+ source 65.1.1.2
+ destination 68.1.1.2
+ quit
+quit
+save
+
+# CE3
+sys
+interface Tunnel0/0/1
+ ip address 192.168.2.2 255.255.255.0 
+ tunnel-protocol gre
+ source 68.1.1.2
+ destination 65.1.1.2
+ quit
+quit
+save
+
+# 运行OSPF
+# CE2
+sys
+ospf 1 
+    area 0.0.0.0 
+        network 192.168.2.0 0.0.0.255
+        quit
+    quit
+quit
+save
+
+
+# CE3
+sys
+ospf 1 
+    area 0.0.0.0 
+        network 192.168.2.0 0.0.0.255
+        quit
+    quit
+quit
+save 

@@ -1,0 +1,10 @@
+SW1，2，3，4：
+
+
+sys
+un in en
+sys LSW4
+vlan batch 10 20 30 40 200
+quit
+#
+save

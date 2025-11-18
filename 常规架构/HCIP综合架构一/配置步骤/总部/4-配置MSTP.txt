@@ -1,0 +1,28 @@
+# SW1、2、3、4
+
+sys
+stp region-configuration
+ region-name 1
+ instance 1 vlan 10 20
+ instance 2 vlan 30 40
+ active region-configuration
+ quit
+quit
+#
+save
+
+# SW1
+sys
+stp instance 1 root primary 
+stp instance 2 root secondary
+quit
+#
+save
+
+# SW2
+sys
+stp instance 1 root secondary 
+stp instance 2 root primary
+quit
+#
+save

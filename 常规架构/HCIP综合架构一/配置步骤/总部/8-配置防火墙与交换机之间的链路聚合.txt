@@ -1,0 +1,53 @@
+
+将防火墙超时时间配置为永不超时
+
+# 防火墙密码更改为了Huawei@123
+
+un in en
+user-interface console 0
+idle-timeout 0
+quit
+
+FW1:
+
+[FW1]interface  Eth-Trunk 1
+[FW1-Eth-Trunk1]portswitch
+[FW1-Eth-Trunk1]mode lacp-static 
+[FW1-Eth-Trunk1]trunkport g1/0/1 
+[FW1-Eth-Trunk1]trunkport g1/0/2
+
+[FW1]int Eth-Trunk 2
+[FW1-Eth-Trunk2]portswitch 
+[FW1-Eth-Trunk2]mode lacp-static 
+[FW1-Eth-Trunk2]trunkport g1/0/3
+[FW1-Eth-Trunk2]trunkport g1/0/4
+
+SW1:
+
+sys
+int Eth-Trunk 1
+	portswitch 
+	mode lacp-static 
+	trunkport g0/0/1
+	trunkport g0/0/2
+	q
+q
+#
+save
+
+SW2:
+
+sys
+int Eth-Trunk 1
+	portswitch 
+	mode lacp-static 
+	trunkport g0/0/1
+	trunkport g0/0/2
+	q
+q
+#
+save
+
+查看聚合口状态
+
+dis eth-trunk

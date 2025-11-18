@@ -1,0 +1,22 @@
+验证总公司与分公司内网互访
+
+PC>ping 10.0.60.253
+
+Ping 10.0.60.253: 32 data bytes, Press Ctrl_C to break
+From 10.0.60.253: bytes=32 seq=1 ttl=120 time=282 ms
+From 10.0.60.253: bytes=32 seq=2 ttl=120 time=172 ms
+From 10.0.60.253: bytes=32 seq=3 ttl=120 time=140 ms
+From 10.0.60.253: bytes=32 seq=4 ttl=120 time=141 ms
+From 10.0.60.253: bytes=32 seq=5 ttl=120 time=157 ms
+
+
+验证总公司与Internet互访
+
+PC>ping 100.100.100.100
+
+Ping 100.100.100.100: 32 data bytes, Press Ctrl_C to break
+From 100.100.100.100: bytes=32 seq=1 ttl=251 time=297 ms
+From 100.100.100.100: bytes=32 seq=2 ttl=251 time=109 ms
+From 100.100.100.100: bytes=32 seq=3 ttl=251 time=110 ms
+From 100.100.100.100: bytes=32 seq=4 ttl=251 time=109 ms
+From 100.100.100.100: bytes=32 seq=5 ttl=251 time=78 ms

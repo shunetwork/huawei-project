@@ -1,0 +1,36 @@
+# ISP1
+sys
+sys ISP1
+int g0/0/0
+	ip add 64.1.1.1 24
+int g0/0/1
+	ip add 100.1.1.1 30
+int g0/0/2
+	ip add 65.1.1.1 24
+	quit
+quit
+save
+
+# ISP2
+sys
+sys ISP2
+int g0/0/0
+	ip add 100.1.1.2 30
+int g0/0/1
+	ip add 100.1.1.5 30
+int loopback 0
+	ip add 100.100.100.100 32
+	quit
+quit
+save
+
+# ISP3
+sys
+sys ISP3
+int g0/0/0
+	ip add 100.1.1.6 30
+int g0/0/1
+	ip add 68.1.1.1 24
+	quit
+quit
+save

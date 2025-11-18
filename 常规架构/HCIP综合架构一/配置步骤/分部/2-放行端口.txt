@@ -1,0 +1,48 @@
+# SW7
+
+system-view
+port-group PG1
+ group-member GigabitEthernet0/0/2 GigabitEthernet0/0/3
+ quit
+port-group PG1
+ port link-type trunk
+ port trunk allow-pass vlan 50 60
+ quit
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 50 60
+ quit
+interface GigabitEthernet0/0/3
+ port link-type trunk
+ port trunk allow-pass vlan 50 60
+ quit
+quit
+save
+
+
+# SW8
+
+system-view
+port-group group-member GigabitEthernet0/0/1 GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 50 60 
+ quit
+interface e0/0/1
+ port link-type access
+ port default vlan 50
+ quit
+quit
+save
+
+# SW9
+system-view
+port-group group-member GigabitEthernet0/0/1 GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 50 60
+ quit
+interface e0/0/1
+ port link-type access
+ port default vlan 60
+ quit
+quit
+save

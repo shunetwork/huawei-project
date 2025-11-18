@@ -1,0 +1,61 @@
+PE1与CE1、CE2
+
+# PE1
+sys
+    bgp 100
+        ipv4-family vpn-instance A 
+            peer 66.1.1.2 as-number 200
+            quit
+        ipv4-family vpn-instance B 
+            peer 67.1.1.2 as-number 200
+            quit
+    quit
+quit
+save
+
+# CE1
+sys
+    bgp 200
+        peer 66.1.1.1 as-number 100
+        quit
+    quit
+quit
+save
+
+# CE2
+sys
+    bgp 200
+        peer 67.1.1.1 as-number 100
+        quit
+    quit
+quit
+save
+
+
+PE2与CE3
+
+# PE2
+sys
+    bgp 100
+        ipv4-family vpn-instance C 
+        peer 69.1.1.2 as-number 300
+        quit
+    quit
+quit 
+save
+
+# CE3
+sys
+    bgp 300
+        peer 69.1.1.1 as-number 100
+        quit
+    quit
+quit
+save
+
+
+
+验证BGP配置
+
+dis bgp peer
+dis bgp vpnv4 all peer
