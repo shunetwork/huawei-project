@@ -1,0 +1,68 @@
+# 公司1交换机2
+
+sys
+sysname Company_1-SW2
+
+vlan batch 10 11 20 22 30
+vlan batch 40 50 60 70 100
+
+# 默认/管理 VLAN 映射到 instance 0
+# instance 1 vlan 10 20 30 40     #用户业务组 A
+# instance 2 vlan 50 60 70 100     #用户业务组 B
+stp region-configuration
+	 region-name Company_1
+	 instance 0 vlan 11 22             
+	 instance 1 vlan 10 20 30 40
+	 instance 2 vlan 50 60 70 100
+	 active region-configuration
+quit
+
+# 将本交换机设为某些实例的 root（示例：本设备作为实例1/2的 primary root）
+stp instance 1 root secondary
+# instance 0 留作 secondary（或在核心设备上做 primary）
+stp instance 2 root primary
+
+interface GigabitEthernet 0/0/1
+	port link-type access
+	port default vlan 22
+	stp edged-port enable
+
+
+interface GigabitEthernet 0/0/3
+	port link-type trunk
+	port trunk pvid vlan 100
+	port trunk allow-pass vlan 70 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/4
+	port link-type trunk
+	port trunk allow-pass vlan 10 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/5
+	port link-type trunk
+	port trunk allow-pass vlan 20 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/6
+	port link-type trunk
+	port trunk allow-pass vlan 30 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/7
+	port link-type trunk
+	port trunk allow-pass vlan 40 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/8
+	port link-type trunk
+	port trunk allow-pass vlan 50 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/9
+	port link-type trunk
+	port trunk allow-pass vlan 60 100
+	stp edged-port disable
+interface GigabitEthernet 0/0/10
+	port link-type trunk
+	port trunk allow-pass vlan 10 11 20 22 30
+	port trunk allow-pass vlan 40 50 60 70 100
+	stp edged-port disable
+	quit
+quit
+save
+y

@@ -1,0 +1,50 @@
+# 交换机2
+
+sys
+interface Vlanif 10
+	ip address 10.1.10.2 24
+	vrrp vrid 1 virtual-ip 10.1.10.254
+	dhcp select global
+
+interface Vlanif 20
+	ip address 10.1.20.2 24
+	vrrp vrid 2 virtual-ip 10.1.20.254
+	dhcp select global
+
+interface Vlanif 22
+	ip address 10.1.249.2 24
+
+interface Vlanif 30
+	ip address 10.1.30.2 24
+	vrrp vrid 3 virtual-ip 10.1.30.254
+	dhcp select global
+
+interface Vlanif 40
+	ip address 10.1.40.2 24
+	vrrp vrid 4 virtual-ip 10.1.40.254
+	dhcp select global
+
+interface Vlanif 50
+	ip address 10.1.50.2 24
+	vrrp vrid 5 virtual-ip 10.1.50.254
+	vrrp vrid 5 priority 200
+	vrrp vrid 2 preempt-mode enable
+	dhcp select global
+
+interface Vlanif 60
+	ip address 10.1.60.2 24
+	vrrp vrid 6 virtual-ip 10.1.60.254
+	vrrp vrid 6 priority 200
+	vrrp vrid 2 preempt-mode enable
+	dhcp select global
+interface Vlanif 70
+	ip address 10.1.70.2 24
+	vrrp vrid 7 virtual-ip 10.1.70.254
+	vrrp vrid 7 priority 200
+	vrrp vrid 2 preempt-mode enable
+	dhcp select global
+	quit
+quit
+save
+y
+#

@@ -1,0 +1,48 @@
+# 研发部
+
+system-view
+sysname Development-SW
+vlan batch 10 100
+quit
+save
+
+# 人事部
+
+system-view
+sysname HumanResource-SW
+vlan batch 20 100
+quit
+save
+
+
+# 党支部
+
+system-view
+sysname Party_branch-SW
+vlan batch 30 100
+quit
+save
+
+# 总裁办公室
+
+system-view
+sysname CEO-SW
+vlan batch 40 100
+quit
+save
+
+# 销售部
+
+system-view
+sysname Sales-SW
+vlan batch 50 100
+quit
+save
+
+# 财务部
+
+system-view
+sysname Financial-SW
+vlan batch 60 100
+quit
+save

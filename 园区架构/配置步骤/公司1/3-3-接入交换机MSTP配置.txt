@@ -1,0 +1,20 @@
+# 接入层交换机加入MSTP
+
+sys
+
+# 默认/管理 VLAN 映射到 instance 0
+# instance 1 vlan 10 20 30 40     #用户业务组 A
+# instance 2 vlan 50 60 70 100     #用户业务组 B
+stp region-configuration
+	 region-name Company_1
+	 instance 0 vlan 11 22             
+	 instance 1 vlan 10 20 30 40
+	 instance 2 vlan 50 60 70 100
+	 active region-configuration
+	 quit
+quit
+save
+y
+#
+
+
