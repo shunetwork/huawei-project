@@ -1,0 +1,33 @@
+# 路由器1初始化端口配置
+
+system-view
+sysname Company_1-R1
+
+interface GigabitEthernet 0/0/0
+	ip address 10.1.252.3 24
+interface GigabitEthernet 0/0/1
+	ip address 10.1.250.1 24
+interface GigabitEthernet 0/0/2
+	ip address 10.1.251.1 24
+	quit
+quit
+save
+y
+
+
+
+# 路由器2初始化端口配置
+
+system-view
+sysname Company_1-R2
+
+interface GigabitEthernet 0/0/0
+	ip address 10.1.252.4 24
+interface GigabitEthernet 0/0/1
+	ip address 10.1.249.1 24
+interface GigabitEthernet 0/0/2
+	ip address 10.1.251.2 24
+	quit
+quit
+save
+y

@@ -1,0 +1,287 @@
+# AC
+
+system-view
+sysname Company_1-AC     
+
+dhcp enable                
+vlan 100
+	quit
+
+vlan pool Company_1
+	vlan 10 20 30 40 50 60 70
+	quit
+
+interface Vlanif 100 
+ ip address 10.1.100.254 24 
+ dhcp select interface 
+ dhcp server excluded-ip-address 10.1.100.1 10.1.100.10
+quit
+
+
+interface GigabitEthernet 0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 100
+quit
+
+# 使用管理口作为源接口
+capwap source interface Vlanif 100
+
+wlan
+ ap auth-mode mac-auth
+
+# ===============================
+#       各部门加密策略
+# ===============================
+security-profile name dev
+ security wpa2 psk pass-phrase dev@123456 aes
+
+security-profile name hr
+ security wpa2 psk pass-phrase hr123456 aes
+
+security-profile name party
+ security wpa2 psk pass-phrase party@123456 aes
+
+security-profile name ceo
+ security wpa2 psk pass-phrase ceo@123456 aes
+
+security-profile name sales
+	security wpa2 psk pass-phrase sales@123456 aes
+
+security-profile name financial
+ security wpa2 psk pass-phrase financial@123456 aes
+
+security-profile name guard
+ security wpa2 psk pass-phrase guard@123456 aes
+
+
+# ===============================
+#          SSID 配置
+# ===============================
+# 为不同部门分别创建 2.4G 与 5G SSID
+
+ssid-profile name dev-2.4G
+ ssid wlan-dev-2.4G
+ssid-profile name dev-5G
+ ssid wlan-dev-5G
+
+ssid-profile name hr-2.4G
+ ssid wlan-hr-2.4G
+ssid-profile name hr-5G
+ ssid wlan-hr-5G
+
+ssid-profile name party-2.4G
+ ssid wlan-party-2.4G
+ssid-profile name party-5G
+ ssid wlan-party-5G
+
+ssid-profile name ceo-2.4G
+ ssid wlan-ceo-2.4G
+ssid-profile name ceo-5G
+ ssid wlan-ceo-5G
+
+ssid-profile name sales-2.4G
+ ssid wlan-sales-2.4G
+ssid-profile name sales-5G
+ ssid wlan-sales-5G
+
+ssid-profile name financial-2.4G
+ ssid wlan-financial-2.4G
+ssid-profile name financial-5G
+ ssid wlan-financial-5G
+
+ssid-profile name guard-2.4G
+ ssid wlan-guard-2.4G
+ssid-profile name guard-5G
+ ssid wlan-guard-5G
+
+# ===============================
+#        VAP（虚拟 AP）配置
+# ===============================
+# 绑定 VLAN、SSID、加密策略，采用直连转发
+
+# --- 开发部 VLAN 10 ---
+vap-profile name dev-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile dev-2.4G
+ security-profile dev
+ service-vlan vlan-id 10
+ forward-mode direct-forward
+
+vap-profile name dev-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile dev-5G
+ security-profile dev
+ service-vlan vlan-id 10
+ forward-mode direct-forward
+
+# --- HR 部门 VLAN 20 ---
+vap-profile name hr-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile hr-2.4G
+ security-profile hr
+ service-vlan vlan-id 20
+ forward-mode direct-forward
+
+vap-profile name hr-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile hr-5G
+ security-profile hr
+ service-vlan vlan-id 20
+ forward-mode direct-forward
+
+# --- Party 部门 VLAN 30 ---
+vap-profile name party-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile party-2.4G
+ security-profile party
+ service-vlan vlan-id 30
+ forward-mode direct-forward
+
+vap-profile name party-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile party-5G
+ security-profile party
+ service-vlan vlan-id 30
+ forward-mode direct-forward
+
+# --- CEO 区域 VLAN 40 ---
+vap-profile name ceo-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile ceo-2.4G
+ security-profile ceo
+ service-vlan vlan-id 40
+ forward-mode direct-forward
+
+vap-profile name ceo-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile ceo-5G
+ security-profile ceo
+ service-vlan vlan-id 40
+ forward-mode direct-forward
+
+# --- 销售部 VLAN 50 ---
+vap-profile name sales-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile sales-2.4G
+ security-profile sales
+ service-vlan vlan-id 50
+ forward-mode direct-forward
+
+vap-profile name sales-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile sales-5G
+ security-profile sales
+ service-vlan vlan-id 50
+ forward-mode direct-forward
+
+# --- 财务部 VLAN 60 ---
+vap-profile name financial-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile financial-2.4G
+ security-profile financial
+ service-vlan vlan-id 60
+ forward-mode direct-forward
+
+vap-profile name financial-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile financial-5G
+ security-profile financial
+ service-vlan vlan-id 60
+ forward-mode direct-forward
+
+# --- 保安部门 VLAN 70 ---
+vap-profile name guard-2.4G
+ service-vlan vlan-pool Company_1
+ ssid-profile guard-2.4G
+ security-profile guard
+ service-vlan vlan-id 70
+ forward-mode direct-forward
+
+vap-profile name guard-5G
+ service-vlan vlan-pool Company_1
+ ssid-profile guard-5G
+ security-profile guard
+ service-vlan vlan-id 70
+ forward-mode direct-forward
+
+# ===============================
+#      AP 分组（对应业务区域）
+# ===============================
+
+ap-group name dev
+ vap-profile dev-2.4G wlan 1 radio 0
+ vap-profile dev-5G wlan 1 radio 1
+
+ap-group name hr
+ vap-profile hr-2.4G wlan 1 radio 0
+ vap-profile hr-5G wlan 1 radio 1
+
+ap-group name party
+ vap-profile party-2.4G wlan 1 radio 0
+ vap-profile party-5G wlan 1 radio 1
+
+ap-group name ceo
+ vap-profile ceo-2.4G wlan 1 radio 0
+ vap-profile ceo-5G wlan 1 radio 1
+
+ap-group name sales
+ vap-profile sales-2.4G wlan 1 radio 0
+ vap-profile sales-5G wlan 1 radio 1
+
+ap-group name financial
+ vap-profile financial-2.4G wlan 1 radio 0
+ vap-profile financial-5G wlan 1 radio 1
+
+ap-group name guard
+ vap-profile guard-2.4G wlan 1 radio 0
+ vap-profile guard-5G wlan 1 radio 1
+
+# ===============================
+#       AP 上线及绑定组
+# ===============================
+
+# 开发部
+ap-id 1 ap-mac 00e0-fccb-1190
+ ap-name dev-AP
+ ap-group dev
+
+
+# 人事部
+ap-id 2 ap-mac 00e0-fc35-03d0
+ ap-name hr-AP
+ ap-group hr
+
+
+# Party 部门
+ap-id 3 ap-mac 00e0-fc9d-4180
+ ap-name party-AP
+ ap-group party
+
+
+# CEO 区域
+ap-id 4 ap-mac 00e0-fcfd-4bd0
+ ap-name ceo-AP
+ ap-group ceo
+
+
+# 销售部
+ap-id 5 ap-mac 00e0-fc08-67c0
+ ap-name sales-AP
+ ap-group sales
+
+
+# 财务部
+ap-id 6 ap-mac 00e0-fc09-2530
+ ap-name financial-AP
+ ap-group financial
+
+
+# 保安区域
+ap-id 7 ap-mac 00e0-fc5b-2180
+ ap-name guard-AP
+ ap-group guard
+
+
+quit
+save
+y

@@ -1,0 +1,67 @@
+#公司1交换机1
+
+sys
+ospf 1
+	area 0
+		network 10.1.10.0 0.0.0.255
+		network 10.1.20.0 0.0.0.255
+		network 10.1.30.0 0.0.0.255
+		network 10.1.40.0 0.0.0.255
+		network 10.1.50.0 0.0.0.255
+		network 10.1.60.0 0.0.0.255
+		network 10.1.70.0 0.0.0.255
+		network 10.1.250.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+#公司1交换机2
+
+sys
+ospf 1
+	area 0
+		network 10.1.10.0 0.0.0.255
+		network 10.1.20.0 0.0.0.255
+		network 10.1.30.0 0.0.0.255
+		network 10.1.40.0 0.0.0.255
+		network 10.1.50.0 0.0.0.255
+		network 10.1.60.0 0.0.0.255
+		network 10.1.70.0 0.0.0.255
+		network 10.1.249.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+#公司1路由器1
+
+sys
+ospf 1
+	area 0
+		network 10.1.99.0 0.0.0.255
+		network 10.1.250.0 0.0.0.255
+		network 10.1.251.0 0.0.0.255
+		network 10.1.252.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+#公司1路由器2
+
+sys
+ospf 1
+	area 0
+		network 10.1.99.0 0.0.0.255
+		network 10.1.249.0 0.0.0.255
+		network 10.1.251.0 0.0.0.255
+		network 10.1.252.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y

@@ -1,0 +1,44 @@
+# 路由器1
+
+sys
+dhcp enable
+
+ip pool vlan99
+	network 10.1.99.0 mask 255.255.255.0
+	gateway-list 10.1.99.254
+	excluded-ip-address 10.1.99.1 10.1.99.10
+	dns-list 10.1.99.1
+	quit
+
+interface GigabitEthernet 4/0/1
+	ip address 10.1.99.3 24
+	vrrp vrid 9 virtual-ip 10.1.99.254
+	vrrp vrid 9 priority 200
+	dhcp select global
+	quit
+quit
+save
+
+
+
+# 路由器2
+sys
+dhcp enable
+
+
+ip pool vlan99
+	network 10.1.99.0 mask 255.255.255.0
+	gateway-list 10.1.99.254
+	excluded-ip-address 10.1.99.1 10.1.99.10
+	dns-list 10.1.99.1
+
+interface GigabitEthernet 4/0/1
+	ip address 10.1.99.4 24
+	vrrp vrid 9 virtual-ip 10.1.99.254
+	dhcp select global
+	quit
+quit
+save
+
+
+
