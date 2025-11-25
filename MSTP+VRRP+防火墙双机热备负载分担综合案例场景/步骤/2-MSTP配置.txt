@@ -1,0 +1,33 @@
+# ACCESS及CORE交换机都需要配
+
+sys
+#
+stp region-configuration 
+	 region-name HCIE 
+	 revision-level 100 
+	 instance 10 vlan 10 20 
+	 instance 20 vlan 30 40 
+	 active region-configuration
+	 quit 
+#
+quit
+save
+y
+
+#CORE1 配置主从
+
+sys
+stp instance 10 root primary  
+stp instance 20 root secondary
+quit
+save
+y
+
+
+#CORE2 配置主从
+sys
+stp instance 10 root secondary
+stp instance 20 root primary
+quit
+save
+y

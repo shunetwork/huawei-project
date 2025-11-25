@@ -1,0 +1,95 @@
+# CORE-SW-1
+
+sys
+bfd
+interface Vlanif10
+	 ip address 192.168.10.253 255.255.255.0 
+	 vrrp vrid 10 virtual-ip 192.168.10.254 
+	 vrrp vrid 10 priority 150 
+	 vrrp vrid 10 track bfd-session 80 reduced 50 
+#
+interface Vlanif20
+	 ip address 192.168.20.253 255.255.255.0 
+	 vrrp vrid 20 virtual-ip 192.168.20.254
+	 vrrp vrid 20 priority 150
+	 vrrp vrid 20 track bfd-session 80 reduced 50
+#
+interface Vlanif30
+	 ip address 192.168.30.252 255.255.255.0 
+	 vrrp vrid 30 virtual-ip 192.168.30.254
+	 vrrp vrid 30 priority 120
+#
+interface Vlanif40
+	 ip address 192.168.40.252 255.255.255.0 
+	 vrrp vrid 40 virtual-ip 192.168.40.254
+	 vrrp vrid 40 priority 120
+#
+interface Vlanif1000
+	 description link_to_USG6000-01
+	 ip address 10.1.1.2 255.255.255.252 
+#
+interface Vlanif1001
+	 description link_to_S5700-02
+	 ip address 10.1.1.13 255.255.255.252
+	 quit
+#
+#
+bfd usg6000_01 bind peer-ip 10.1.1.1 source-ip 10.1.1.2 
+	 discriminator local 80 
+	 discriminator remote 70 
+	 min-tx-interval 100  
+	 min-rx-interval 100  
+	 commit
+	 quit
+#
+quit
+save
+y
+
+# CORE-SW-2
+
+sys
+bfd
+#
+interface Vlanif10
+	 ip address 192.168.10.252 255.255.255.0 
+	 vrrp vrid 10 virtual-ip 192.168.10.254
+	 vrrp vrid 10 priority 120
+#
+interface Vlanif20
+	 ip address 192.168.20.252 255.255.255.0 
+	 vrrp vrid 20 virtual-ip 192.168.20.254
+	 vrrp vrid 20 priority 120
+#
+interface Vlanif30
+	 ip address 192.168.30.253 255.255.255.0 
+	 vrrp vrid 30 virtual-ip 192.168.30.254
+	 vrrp vrid 30 priority 150
+	 vrrp vrid 30 track bfd-session 160 reduced 50
+#
+interface Vlanif40
+	 ip address 192.168.40.253 255.255.255.0 
+	 vrrp vrid 40 virtual-ip 192.168.40.254
+	 vrrp vrid 40 priority 150
+	 vrrp vrid 40 track bfd-session 160 reduced 50
+#
+interface Vlanif1000
+	 description link_to_USG6000-02
+	 ip address 10.1.1.6 255.255.255.252 
+#
+interface Vlanif1001
+	 description link_to_S5700-01
+	 ip address 10.1.1.14 255.255.255.252 
+	 quit
+#
+bfd usg6000_02 bind peer-ip 10.1.1.5 source-ip 10.1.1.6 
+	 discriminator local 160
+	 discriminator remote 150
+	 min-tx-interval 100
+	 min-rx-interval 100
+	 commit
+	 quit
+#
+quit
+save
+y

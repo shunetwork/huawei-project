@@ -1,0 +1,84 @@
+# ACC-SW-1
+
+system-view
+sysname ACC-SW-1
+undo info-center enable 
+
+vlan batch 10 20 30 40
+#
+interface Ethernet0/0/1 
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface Ethernet0/0/2 
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface Ethernet0/0/3 
+ port link-type access
+ port default vlan 10
+ quit
+#
+quit
+save
+y
+
+# ACC-SW-2
+
+system-view
+sysname ACC-SW-2
+undo info-center enable 
+
+vlan batch 10 20 30 40
+#
+interface Ethernet0/0/1
+	 port link-type trunk
+	 undo port trunk allow-pass vlan 1
+	 port trunk allow-pass vlan 10 20 30 40
+#
+interface Ethernet0/0/2
+	 port link-type trunk
+	 undo port trunk allow-pass vlan 1
+	 port trunk allow-pass vlan 10 20 30 40
+#
+interface Ethernet0/0/3
+	 port link-type access
+	 port default vlan 20
+#
+interface Ethernet0/0/4
+	 port link-type access
+	 port default vlan 30
+	 quit
+#
+quit
+save
+y
+
+# ACC-SW-3
+
+system-view
+sysname ACC-SW-3
+undo info-center enable 
+
+vlan batch 10 20 30 40
+#
+interface Ethernet0/0/1
+	 port link-type trunk
+	 undo port trunk allow-pass vlan 1
+	 port trunk allow-pass vlan 10 20 30 40
+#
+interface Ethernet0/0/2
+	 port link-type trunk
+	 undo port trunk allow-pass vlan 1
+	 port trunk allow-pass vlan 10 20 30 40
+#
+interface Ethernet0/0/3
+	 port link-type access
+	 port default vlan 40
+	 quit
+#
+quit
+save
+y

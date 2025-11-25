@@ -1,0 +1,101 @@
+# CORE-SW-1
+
+system-view
+sysname CORE-SW-1
+undo info-center enable 
+
+vlan batch 10 20 30 40 1000 to 1001
+#
+vlan 1001
+ description link_to_S5700-02
+ quit
+#
+interface Eth-Trunk10 
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40 1001
+#
+interface GigabitEthernet0/0/1 
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface GigabitEthernet0/0/2  
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface GigabitEthernet0/0/3 
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface GigabitEthernet0/0/4 
+ eth-trunk 10
+#
+interface GigabitEthernet0/0/5  
+ eth-trunk 10
+#
+interface GigabitEthernet0/0/6
+ description link_to_UEG6000-01
+ port link-type access
+ port default vlan 1000
+#
+interface LoopBack0 
+ ip address 10.10.10.1 255.255.255.255
+ quit 
+#
+quit
+save
+y
+
+# CORE-SW-2
+
+system-view
+sysname CORE-SW-2
+undo info-center enable 
+
+#
+vlan batch 10 20 30 40 1000 to 1001
+#
+vlan 1001
+ description link_to_S5700-01
+#
+interface Eth-Trunk10
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40 1001
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface GigabitEthernet0/0/3
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 10 20 30 40
+#
+interface GigabitEthernet0/0/4
+ eth-trunk 10
+#
+interface GigabitEthernet0/0/5
+ eth-trunk 10
+#
+interface GigabitEthernet0/0/6
+ description link_to_USG6000-02
+ port link-type access
+ port default vlan 1000
+#
+interface LoopBack0
+ ip address 10.10.10.2 255.255.255.255
+ quit
+#
+quit
+save
+y
