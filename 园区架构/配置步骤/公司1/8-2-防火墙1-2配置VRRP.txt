@@ -1,0 +1,51 @@
+#防火墙1
+
+sys
+interface GigabitEthernet 1/0/2
+	vrrp vrid 1 virtual-ip 10.1.252.254 24 active
+interface GigabitEthernet 1/0/0
+	vrrp vrid 2 virtual-ip 60.15.135.2 24 active
+	quit
+
+hrp interface GigabitEthernet1/0/1 remote 10.1.254.2
+hrp enable
+
+security-policy
+rule name d-l
+source-zone dmz local
+destination-zone dmz local
+action permit
+rule name t-u
+source-zone trust
+destination-zone untrust
+action permit
+quit
+
+nat address-group group1
+mode pat
+section 60.15.135.10 60.15.135.20
+nat-policy
+rule name nat1
+source-zone trust
+destination-zone untrust
+source-address 10.1.0.0  16
+action source-nat address-group group1
+
+quit
+save
+y
+
+#防火墙2
+
+sys
+interface GigabitEthernet 1/0/2
+	vrrp vrid 1 virtual-ip 10.1.252.254 24 standby
+interface GigabitEthernet 1/0/0
+	vrrp vrid 2 virtual-ip 60.15.135.2 24 standby
+	quit
+
+hrp interface GigabitEthernet1/0/1 remote 10.1.254.1
+hrp enable
+quit
+save
+y

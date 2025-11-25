@@ -1,0 +1,45 @@
+# 防火墙1
+# 防火墙密码更改为了Huawei@123
+
+system-view
+sysname Company_1-FW1
+
+interface GigabitEthernet 1/0/0
+	ip address 10.1.253.1 24
+interface GigabitEthernet 1/0/1
+	ip address 10.1.254.1 24
+interface GigabitEthernet 1/0/2
+	ip address 10.1.252.1 24
+
+firewall zone trust
+	add interface GigabitEthernet 1/0/2
+	add interface GigabitEthernet 1/0/1
+firewall zone untrust
+	add interface GigabitEthernet 1/0/0
+	quit
+quit
+save
+y
+
+
+# 防火墙2
+
+system-view
+sysname Company_1-FW2
+
+interface GigabitEthernet 1/0/0
+	ip address 10.1.253.2 24
+interface GigabitEthernet 1/0/1
+	ip address 10.1.254.2 24
+interface GigabitEthernet 1/0/2
+	ip address 10.1.252.2 24
+
+firewall zone trust
+	add interface GigabitEthernet 1/0/2
+	add interface GigabitEthernet 1/0/1
+firewall zone untrust
+	add interface GigabitEthernet 1/0/0
+
+quit
+save
+y

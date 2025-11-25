@@ -1,0 +1,33 @@
+#防火墙1
+
+sys
+ospf 1
+ router-id 1.1.1.1
+ area 0
+	network 60.15.135.0 0.0.0.255
+	network 10.1.252.0 0.0.0.255
+	network 10.1.253.0 0.0.0.255
+	network 10.1.254.0 0.0.0.255
+	quit
+ quit
+ip route-static 0.0.0.0 0 60.15.135.1
+quit
+save
+y
+
+# 防火墙2
+
+sys
+ospf 1
+ router-id 2.2.2.2
+ area 0
+	network 60.15.135.0 0.0.0.255
+	network 10.1.252.0 0.0.0.255
+	network 10.1.253.0 0.0.0.255
+	network 10.1.254.0 0.0.0.255
+	quit
+ quit
+ip route-static 0.0.0.0 0 60.15.135.1
+quit
+save
+y

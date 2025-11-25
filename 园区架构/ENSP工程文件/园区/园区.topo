@@ -107,11 +107,6 @@
             </slot>
             <slot isMainBoard="0" id="3" type="9" />
         </dev>
-        <dev id="23FC75C3-A809-42af-BF44-9E275FEEE739" name="AC1" poe="1" model="AC6605" settings="" system_mac="00-E0-FC-0E-17-C5" com_port="2013" bootmode="0" cx="796.000000" cy="919.000000" edit_left="823" edit_top="973">
-            <slot number="slot17" isMainBoard="1">
-                <interface sztype="Ethernet" interfacename="GE" count="24" />
-            </slot>
-        </dev>
         <dev id="22D8DC70-D209-44be-9016-F2D71310F116" name="研发部-SW" poe="0" model="S3700" settings="" system_mac="4C-1F-CC-83-17-CA" com_port="2005" bootmode="0" cx="697.000000" cy="1116.000000" edit_left="672" edit_top="1141">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="22" />
@@ -128,12 +123,12 @@
                 <interface sztype="Ethernet" interfacename="GE" count="2" />
             </slot>
         </dev>
-        <dev id="F32E1024-3F31-4bf2-91B0-EF1DFDB65555" name="FTP" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-9B-5C-8A -ipaddr 0.0.0.0 -ipmask 255.255.255.0 -gateway 0.0.0.0 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-7D-6D-E0" com_port="0" bootmode="1" cx="1848.000000" cy="708.000000" edit_left="1875" edit_top="762">
+        <dev id="F32E1024-3F31-4bf2-91B0-EF1DFDB65555" name="FTP" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-9B-5C-8A -ipaddr 0.0.0.0 -ipmask 255.255.255.0 -gateway 0.0.0.0 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-19-23-E1" com_port="0" bootmode="1" cx="1848.000000" cy="708.000000" edit_left="1875" edit_top="762">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
         </dev>
-        <dev id="91796B70-BDAB-440c-9AC3-8DD48463E99A" name="公司1交换机" poe="0" model="S5700" settings="" system_mac="4C-1F-CC-5F-59-65" com_port="2021" bootmode="1" cx="1173.000000" cy="373.000000" edit_left="1135" edit_top="395">
+        <dev id="91796B70-BDAB-440c-9AC3-8DD48463E99A" name="公司1交换机" poe="0" model="S5700" settings="" system_mac="4C-1F-CC-5F-59-65" com_port="2021" bootmode="0" cx="1173.000000" cy="373.000000" edit_left="1135" edit_top="395">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="GE" count="24" />
             </slot>
@@ -254,13 +249,18 @@
         <dev id="869DED1D-B424-4205-BF90-13E210263FC3" name="STA3" poe="0" model="STA" settings=" -simsta_ip 0.0.0.0  -simsta_mask 0.0.0.0  -simsta_gateway 0.0.0.0  -simsta_mac 54-89-98-2E-2A-E9  -simsta_check 0 " system_mac="54-89-98-2E-2A-E9" com_port="0" bootmode="0" cx="832.000000" cy="1408.000000" edit_left="859" edit_top="1462">
             <slot number="slot17" isMainBoard="1" />
         </dev>
-        <dev id="1FDF1169-3B1E-4271-91B9-F2D7728B2D84" name="DNS" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-63-5F-22 -ipaddr 10.1.99.1 -ipmask 255.255.255.0 -gateway 10.1.99.254 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist _www.baidu.com_1.1.1.1" system_mac="54-89-98-D2-1B-7E" com_port="0" bootmode="0" cx="1846.000000" cy="527.000000" edit_left="1873" edit_top="581">
+        <dev id="1FDF1169-3B1E-4271-91B9-F2D7728B2D84" name="DNS" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-63-5F-22 -ipaddr 10.1.99.1 -ipmask 255.255.255.0 -gateway 10.1.99.254 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist _www.baidu.com_1.1.1.1" system_mac="54-89-98-3F-45-CA" com_port="0" bootmode="0" cx="1846.000000" cy="527.000000" edit_left="1873" edit_top="581">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
         </dev>
         <dev id="1ADCE11A-1DC8-4cef-B87C-A83A7D1CCDF1" name="STA1" poe="0" model="STA" settings=" -simsta_ip 0.0.0.0  -simsta_mask 0.0.0.0  -simsta_gateway 0.0.0.0  -simsta_mac 54-89-98-9C-4A-70  -simsta_check 0 " system_mac="54-89-98-9C-4A-70" com_port="0" bootmode="0" cx="1780.000000" cy="845.000000" edit_left="1807" edit_top="899">
             <slot number="slot17" isMainBoard="1" />
+        </dev>
+        <dev id="23FC75C3-A809-42af-BF44-9E275FEEE739" name="AC1" poe="1" model="AC6605" settings="" system_mac="00-E0-FC-0E-17-C5" com_port="2013" bootmode="0" cx="796.000000" cy="919.000000" edit_left="823" edit_top="973">
+            <slot number="slot17" isMainBoard="1">
+                <interface sztype="Ethernet" interfacename="GE" count="24" />
+            </slot>
         </dev>
         <dev id="F3BAF35F-8EF6-4a51-88A8-92EA138D018C" name="公司1防火墙2" poe="0" model="USG6000V" settings="" system_mac="00-E0-FC-8C-49-D5" com_port="2012" bootmode="0" cx="1394.000000" cy="521.000000" edit_left="1363" edit_top="572">
             <slot id="1">
@@ -452,5 +452,6 @@
         <txttip left="1072" top="757" right="1083" bottom="774" content="1" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
         <txttip left="1341" top="642" right="1443" bottom="659" content="10.1.252.0/24" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
         <txttip left="1409" top="719" right="1420" bottom="736" content="4" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
+        <txttip left="1181" top="524" right="1283" bottom="541" content="10.1.254.0/24" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
     </txttips>
 </topo>
