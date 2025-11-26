@@ -1,0 +1,26 @@
+
+admin
+Huawei@123
+sys
+sysname DeviceA
+undo info-center enable
+
+int GigabitEthernet 1/0/1
+	ip address 1.1.1.1 255.255.255.0
+	service-manage ping permit
+	quit
+int GigabitEthernet 1/0/0
+	ip address 10.3.0.1 255.255.255.0
+	service-manage ping permit
+	quit
+firewall zone untrust
+	add interface GigabitEthernet 1/0/1
+	quit
+firewall zone trust
+	add interface GigabitEthernet 1/0/0
+	quit
+
+dis ip int bri
+quit
+save
+y

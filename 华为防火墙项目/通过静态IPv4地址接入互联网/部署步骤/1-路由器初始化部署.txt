@@ -1,0 +1,10 @@
+sys ISP
+int g0/0/0
+ip add 1.1.1.254 24
+quit
+int g0/0/2
+ip add 2.2.2.254 24
+quit
+save
+y
+

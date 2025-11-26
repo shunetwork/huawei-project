@@ -1,0 +1,62 @@
+# CORE-FW-1
+
+sys
+# 
+link-group 1 timer 5 
+#
+interface LoopBack0
+ 	ip address 10.10.10.3 255.255.255.255
+#
+interface Eth-Trunk10                
+	 description hrp_heartbeat
+	 ip address 10.1.1.9 255.255.255.252 
+#
+interface GigabitEthernet0/0/0 
+	 undo shutdown
+	 ip binding vpn-instance default
+	 ip address 192.168.99.100 255.255.255.0
+	 alias GE0/METH
+	 service-manage http permit
+	 service-manage https permit
+	 service-manage ping permit
+	 service-manage ssh permit
+	 service-manage snmp permit
+	 service-manage telnet permit
+#
+interface GigabitEthernet1/0/0 
+	 description link_to_S5700-01
+	 undo shutdown
+	 ip address 10.1.1.1 255.255.255.252
+	 ospf network-type p2p
+	 link-group 1               
+#                                         
+interface GigabitEthernet1/0/1         
+	 description link_to_isp1_01
+	 undo shutdown
+	 ip address 20.1.1.2 255.255.255.252
+	 link-group 1      
+#                                         
+interface GigabitEthernet1/0/2           
+	 description link_to_isp2_01
+	 undo shutdown
+	 ip address 30.1.1.2 255.255.255.252 
+	 link-group 1      
+#                                         
+interface GigabitEthernet1/0/3           
+	description link_to_isp3_01
+	 undo shutdown
+	 ip address 40.1.1.2 255.255.255.252
+	 link-group 1  
+#                                         
+interface GigabitEthernet1/0/4    
+	 undo shutdown                            
+	 eth-trunk 10                             
+#                                         
+interface GigabitEthernet1/0/5        
+	 undo shutdown                            
+	 eth-trunk 10
+	 quit                             
+# 
+quit
+save
+y

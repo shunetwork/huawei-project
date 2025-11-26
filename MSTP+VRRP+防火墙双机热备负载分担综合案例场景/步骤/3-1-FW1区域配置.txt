@@ -1,0 +1,41 @@
+# CORE-FW-1
+
+sys
+sys CORE-FW-1
+undo info-center enable 
+
+#
+firewall zone local
+ set priority 100
+#
+firewall zone trust 
+ set priority 85
+ add interface GigabitEthernet0/0/0 
+ add interface GigabitEthernet1/0/0 
+#
+firewall zone untrust 
+ set priority 5
+#
+firewall zone dmz
+ set priority 50
+#
+firewall zone name hrp 
+ set priority 60
+ add interface Eth-Trunk10          
+#                                         
+firewall zone name isp1           
+ set priority 10                          
+ add interface GigabitEthernet1/0/1      
+#                                         
+firewall zone name isp2       
+ set priority 15                          
+ add interface GigabitEthernet1/0/2    
+#                                         
+firewall zone name isp3        
+ set priority 20                          
+ add interface GigabitEthernet1/0/3 
+ quit
+#
+quit
+save
+y

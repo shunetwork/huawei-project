@@ -1,0 +1,24 @@
+
+admin
+Huawei@123
+sys
+security-policy
+	rule name policy_sec_1
+		source-address 10.3.0.0 mask 255.255.255.0
+		source-zone trust
+		destination-zone untrust
+		action permit 
+		quit
+	quit
+
+nat-policy
+	rule name policy_nat_1
+		source-address 10.3.0.0 mask 255.255.255.0
+		source-zone trust
+		action source-nat easy-ip
+		quit
+	quit
+ip route-static 0.0.0.0 0.0.0.0 1.1.1.254
+quit
+save
+y
