@@ -1,0 +1,21 @@
+#FW1配置后会自动同步到FW2
+
+admin
+Huawei@123
+sys
+
+security-policy
+	rule name trust-to-untrust
+		source-zone trust
+		destination-zone untrust
+		source-address 10.1.1.0 mask 255.255.255.0
+		destination-address 10.1.2.0 mask 255.255.255.0
+		action permit
+		quit
+	quit
+
+quit
+save
+y
+
+

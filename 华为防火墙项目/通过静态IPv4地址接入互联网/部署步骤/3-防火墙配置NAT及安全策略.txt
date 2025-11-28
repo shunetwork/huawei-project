@@ -2,6 +2,15 @@
 admin
 Huawei@123
 sys
+
+security-policy
+	rule name local_to_untrust		
+		source-zone local
+		destination-zone untrust
+		action permit 
+		quit
+	quit
+
 security-policy
 	rule name policy_sec_1
 		source-address 10.3.0.0 mask 255.255.255.0

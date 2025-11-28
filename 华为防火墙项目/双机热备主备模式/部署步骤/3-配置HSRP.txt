@@ -1,0 +1,47 @@
+#FW1
+
+admin
+Huawei@123
+sys
+
+
+interface Eth-Trunk 1
+	trunkport GigabitEthernet 1/0/5 to 1/0/6 	
+	ip address 10.1.12.1 255.255.255.0
+	quit  
+
+firewall zone dmz
+	add interface Eth-Trunk 1
+	quit    
+
+hrp enable 
+hrp interface Eth-Trunk 1 remote  10.1.12.2
+
+
+quit
+save
+y
+
+#FW2
+
+admin
+Huawei@123
+sys
+
+
+interface Eth-Trunk 1
+	trunkport GigabitEthernet 1/0/5 to 1/0/6 	
+	ip address 10.1.12.2 255.255.255.0
+	quit      
+
+firewall zone dmz
+	add interface Eth-Trunk 1
+	quit
+
+hrp enable 
+hrp interface Eth-Trunk 1 remote  10.1.12.1
+
+
+quit
+save
+y

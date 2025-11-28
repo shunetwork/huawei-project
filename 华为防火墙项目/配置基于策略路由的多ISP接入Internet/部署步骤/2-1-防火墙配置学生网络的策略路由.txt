@@ -1,0 +1,15 @@
+#FW1
+
+admin
+Huawei@123
+sys
+policy-based-route
+	rule name policy_route_1
+		ingress-interface GigabitEthernet 1/0/3
+		source-address 10.3.0.0 24
+		action pbr egress-interface  GigabitEthernet 1/0/2 next-hop 2.2.2.1
+		quit
+	quit
+quit
+save
+y

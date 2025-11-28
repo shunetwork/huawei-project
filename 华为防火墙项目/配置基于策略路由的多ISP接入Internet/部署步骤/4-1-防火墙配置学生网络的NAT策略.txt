@@ -1,0 +1,35 @@
+#FW1
+
+admin
+Huawei@123
+sys
+
+nat address-group address_1
+	section 0 2.2.2.10 2.2.2.15
+	quit
+
+nat-policy
+	rule name policy_nat_1
+		source-zone trust
+		destination-zone untrust
+		source-address 10.3.0.0 24
+		action source-nat address-group address_1
+		quit
+	quit
+
+nat address-group address_2
+	section 0 1.1.1.10 1.1.1.15
+	quit
+
+nat-policy
+	rule name policy_nat_2
+		source-zone trust
+		destination-zone untrust1
+		source-address 10.3.1.0 24
+		action source-nat address-group address_2
+		quit
+	quit
+
+quit
+save
+y

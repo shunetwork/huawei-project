@@ -1,0 +1,57 @@
+#FW1
+
+admin
+Huawei@123
+sys
+sysname FW1
+undo info-center enable
+
+int GigabitEthernet 1/0/0
+	ip address 10.1.1.1 255.255.255.0
+	quit
+
+int GigabitEthernet 1/0/1
+	ip address 10.1.2.1 255.255.255.0
+	quit
+
+firewall zone trust
+	add interface GigabitEthernet 1/0/0
+	quit
+
+firewall zone untrust
+	add interface GigabitEthernet 1/0/1
+	quit
+
+
+quit
+save
+y
+
+#FW2
+
+admin
+Huawei@123
+sys
+sysname FW2
+undo info-center enable
+
+int GigabitEthernet 1/0/0
+	ip address 10.1.1.2 255.255.255.0
+	quit
+
+int GigabitEthernet 1/0/1
+	ip address 10.1.2.2 255.255.255.0
+	quit
+
+firewall zone trust
+	add interface GigabitEthernet 1/0/0
+	quit
+
+firewall zone untrust
+	add interface GigabitEthernet 1/0/1
+	quit
+
+
+quit
+save
+y

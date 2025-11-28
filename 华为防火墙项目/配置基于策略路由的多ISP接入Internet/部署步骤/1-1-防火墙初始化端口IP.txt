@@ -1,0 +1,48 @@
+#FW1
+
+admin
+Huawei@123
+sys
+sysname FW1
+undo info-center enable
+
+int GigabitEthernet 1/0/1
+	ip address 1.1.1.254 255.255.255.0
+	service-manage ping permit
+	quit
+
+int GigabitEthernet 1/0/2
+	ip address 2.2.2.254 255.255.255.0
+	service-manage ping permit
+	quit
+
+int GigabitEthernet 1/0/3
+	ip address 10.3.0.254 255.255.255.0
+	service-manage ping permit
+	quit
+
+int GigabitEthernet 1/0/4
+	ip address 10.3.1.254 255.255.255.0
+	service-manage ping permit
+	quit
+
+
+firewall zone trust
+	add interface GigabitEthernet 1/0/3
+	add interface GigabitEthernet 1/0/4
+	quit
+
+firewall zone untrust
+	add interface GigabitEthernet 1/0/2
+	quit
+	
+firewall zone name untrust1
+	set priority 10
+	quit
+
+firewall zone untrust1
+	add interface GigabitEthernet 1/0/1
+	quit
+quit
+save
+y

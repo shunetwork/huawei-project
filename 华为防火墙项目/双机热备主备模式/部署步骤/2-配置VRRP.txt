@@ -1,0 +1,35 @@
+#FW1
+
+admin
+Huawei@123
+sys
+
+int GigabitEthernet 1/0/0
+	vrrp vrid 1 virtual-ip 10.1.1.254 24 active
+	quit
+
+int GigabitEthernet 1/0/1
+	vrrp vrid 2 virtual-ip 10.1.2.254 24 active
+	quit
+
+quit
+save
+y
+
+#FW2
+
+admin
+Huawei@123
+sys
+
+int GigabitEthernet 1/0/0
+	vrrp vrid 1 virtual-ip 10.1.1.254 24 standby
+	quit
+
+int GigabitEthernet 1/0/1
+	vrrp vrid 2 virtual-ip 10.1.2.254 24 standby
+	quit
+
+quit
+save
+y
