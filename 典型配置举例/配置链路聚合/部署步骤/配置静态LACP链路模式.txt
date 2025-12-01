@@ -1,0 +1,77 @@
+
+配置思路
+
+采用如下的思路配置静态 LACP 模式链路聚合：
+1. 在 Switch 设备上创建 Eth-Trunk，配置 Eth-Trunk 为静态 LACP 模式。
+2. 将成员接口加入 Eth-Trunk。
+3. 配置系统优先级确定主动端。
+4. 配置活动接口上限阈值。
+5. 配置接口优先级确定活动链路。
+数据准备
+为完成此配置例，需准备如下的数据：
+l 两端 Switch 设备链路聚合组编号。
+l SwitchA 系统优先级。
+l 活动接口上限阈值。
+l 活动接口 LACP 优先级。
+
+操作步骤
+步骤 1 创建编号为 1 的 Eth-Trunk，配置它的工作模式为静态 LACP 模式
+
+# 配置 SwitchA
+7<Quidway> system-view
+[Quidway] sysname SwitchA
+[SwitchA] interface eth-trunk 1
+[SwitchA-Eth-Trunk1] bpdu enable
+[SwitchA-Eth-Trunk1] mode lacp-static
+[SwitchA-Eth-Trunk1] quit
+
+# 配置 SwitchB
+<Quidway> system-view
+[Quidway] sysname SwitchB
+[SwitchB] interface eth-trunk 1
+[SwitchB-Eth-Trunk1] bpdu enable
+[SwitchB-Eth-Trunk1] mode lacp-static
+[SwitchB-Eth-Trunk1] quit
+
+步骤 2 将成员接口加入 Eth-Trunk
+# 配置 SwitchA。
+[SwitchA] interface xgigabitethernet 0/0/1
+[SwitchA-XGigabitEthernet0/0/1] eth-trunk 1
+[SwitchA-XGigabitEthernet0/0/1] quit
+[SwitchA] interface xgigabitethernet 0/0/2
+[SwitchA-XGigabitEthernet0/0/2] eth-trunk 1
+[SwitchA-XGigabitEthernet0/0/2] quit
+[SwitchA] interface xgigabitethernet 0/0/3
+[SwitchA-XGigabitEthernet0/0/3] eth-trunk 1
+[SwitchA-XGigabitEthernet0/0/3] quit
+
+# 配置 SwitchB。
+[SwitchB] interface xgigabitethernet 0/0/1
+[SwitchB-XGigabitEthernet0/0/1] eth-trunk 1
+[SwitchB-XGigabitEthernet0/0/1] quit
+[SwitchB] interface xgigabitethernet 0/0/2
+[SwitchB-XGigabitEthernet0/0/2] eth-trunk 1
+[SwitchB-XGigabitEthernet0/0/2] quit
+[SwitchB] interface xgigabitethernet 0/0/3
+[SwitchB-XGigabitEthernet0/0/3] eth-trunk 1
+[SwitchB-XGigabitEthernet0/0/3] quit
+
+步骤 3 在 SwitchA 上配置系统优先级为 100，使其成为 LACP 主动端
+[SwitchA] lacp priority 100
+
+步骤 4 在 SwitchA 上配置活动接口上限阈值为 2
+[SwitchA] interface eth-trunk 1
+[SwitchA-Eth-Trunk1] max active-linknumber 2
+[SwitchA-Eth-Trunk1] quit
+
+步骤 5 在 SwitchA 上配置接口优先级确定活动链路
+[SwitchA] interface xgigabitethernet 0/0/1
+[SwitchA-XGigabitEthernet0/0/1] lacp priority 100
+[SwitchA-XGigabitEthernet0/0/1] quit
+[SwitchA] interface xgigabitethernet 0/0/2
+[SwitchA-XGigabitEthernet0/0/2] lacp priority 100
+[SwitchA-XGigabitEthernet0/0/2] quit
+
+步骤 6 验证配置结果
+# 查看各 Switch 设备的 Eth-Trunk 信息，查看链路是否协商成功。
+[SwitchA] display eth-trunk 1

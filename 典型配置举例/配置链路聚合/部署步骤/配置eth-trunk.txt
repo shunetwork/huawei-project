@@ -1,0 +1,31 @@
+步骤 1 创建 Eth-Trunk
+# 创建 Eth-Trunk 1。
+<Quidway> system-view
+[Quidway] sysname Switch
+[Switch] interface eth-trunk 1
+[Switch-Eth-Trunk1] quit
+
+步骤 2 向 Eth-Trunk 中加入成员接口
+
+# 将 XGE0/0/3 加入 Eth-Trunk 1。
+[Switch] interface xgigabitethernet 0/0/3
+[Switch-XGigabitEthernet0/0/3] eth-trunk 1
+[Switch-XGigabitEthernet0/0/3] quit
+
+# 将 XGE0/0/4 加入 Eth-Trunk 1。
+[Switch] interface xgigabitethernet 0/0/4
+[Switch-XGigabitEthernet0/0/4] eth-trunk 1
+[Switch-XGigabitEthernet0/0/4] quit
+
+步骤 3 配置 Eth-Trunk 1
+# 配置 Eth-Trunk 1 允许 VLAN100-200 的报文通过。
+[Switch] interface eth-trunk 1
+[Switch-Eth-Trunk1] port link-type trunk
+[Switch-Eth-Trunk1] port trunk allow-pass vlan 100 to 200
+[Switch-Eth-Trunk1] quit
+
+
+# 批量配置方式
+
+# 一次性添加多个不连续的接口或接口范围
+[Quidway-Eth-Trunk1] trunkport gigabitethernet 0/0/1 0/0/3 0/0/5 to 0/0/8
