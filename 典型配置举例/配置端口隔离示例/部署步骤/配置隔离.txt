@@ -1,0 +1,13 @@
+
+<Quidway> system-view
+[Quidway] port-isolate mode l2
+
+# 配置 XGigigabitEthernet0/0/1 的端口隔离功能。
+[Quidway] interface xgigabitethernet 0/0/1
+[Quidway-XGigabitEthernet0/0/1] port-isolate enable
+[Quidway-XGigabitEthernet0/0/1] quit
+
+# 配置 XGigigabitEthernet0/0/2 的端口隔离功能。
+[Quidway] interface xgigabitethernet 0/0/2
+[Quidway-XGigabitEthernet0/0/2] port-isolate enable
+[Quidway-XGigabitEthernet0/0/2] quit
