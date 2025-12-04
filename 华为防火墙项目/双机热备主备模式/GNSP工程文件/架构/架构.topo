@@ -80,7 +80,7 @@
         <txttip left="531" top="77" right="618" bottom="109" content="untrust&#x0D;&#x0A;10.1.2.0/24" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
         <txttip left="546" top="324" right="557" bottom="341" content="1" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
         <txttip left="833" top="321" right="844" bottom="338" content="2" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
-        <txttip left="667" top="374" right="724" bottom="406" content="vrid 1&#x0D;&#x0A;254" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
-        <txttip left="665" top="271" right="722" bottom="303" content="vrid 2&#x0D;&#x0A;254" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
+        <txttip left="667" top="374" right="716" bottom="406" content="vrid 1&#x0D;&#x0A;254" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
+        <txttip left="665" top="271" right="714" bottom="303" content="vrid 2&#x0D;&#x0A;254" fontname="Consolas" fontstyle="0" editsize="100" txtcolor="-16777216" txtbkcolor="-7278960" charset="1" />
     </txttips>
 </topo>

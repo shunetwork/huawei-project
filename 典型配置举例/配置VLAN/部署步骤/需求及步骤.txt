@@ -1,0 +1,56 @@
+配置思路
+采用如下的思路配置VLAN：
+1. 创建VLAN，规划员工所属的VLAN。
+2. 配置端口属性，确定设备连接对象。
+3. 关联端口和VLAN，将连接部门1 和部门2 的交换机端口划分到VLAN2，将连接
+部门3 和部门4 的交换机端口划分到VLAN3，隔离部门1、部门2 和部门3、部门
+4 间的访问。
+数据准备
+为完成此配置例，需准备如下的数据：
+l 接口XGigabitEthernet0/0/1、XGigabitEthernet0/0/2 属于VLAN2。
+l 接口XGigabitEthernet0/0/3、XGigabitEthernet0/0/4 属于VLAN3。
+操作步骤
+
+步骤1 配置Switch
+
+# 创建VLAN2。
+<Quidway> system-view
+[Quidway] vlan 2
+[Quidway-vlan2] quit
+
+# 将接口XGigabitEthernet0/0/1 的类型为Trunk，并加入到VLAN2 中。
+[Quidway] interface xgigabitethernet 0/0/1
+[Quidway-XGigabitEthernet0/0/1] port link-type trunk
+[Quidway-XGigabitEthernet0/0/1] port trunk allow-pass vlan 2
+[Quidway-XGigabitEthernet0/0/1] quit
+
+# 配置接口XGigabitEthernet0/0/2 的类型为Trunk，并加入到VLAN2 中。
+[Quidway]interface xgigabitethernet 0/0/2
+[Quidway-XGigabitEthernet0/0/2] port link-type trunk
+[Quidway-XGigabitEthernet0/0/2] port trunk allow-pass vlan 2
+[Quidway-XGigabitEthernet0/0/2] quit
+
+# 创建VLAN3。
+[Quidway] vlan 3
+[Quidway-vlan3] quit
+
+# 配置接口XGigabitEthernet0/0/3 的类型为Trunk，并加入到VLAN3 中。
+[Quidway] interface xgigabitethernet 0/0/3
+[Quidway-XGigabitEthernet0/0/3] port link-type trunk
+[Quidway-XGigabitEthernet0/0/3] port trunk allow-pass vlan 3
+[Quidway-XGigabitEthernet0/0/3] quit
+
+# 将接口XGigabitEthernet0/0/4 的类型为Trunk，并加入到VLAN3 中。
+[Quidway] interface xgigabitethernet 0/0/4
+[Quidway-XGigabitEthernet0/0/4] port link-type trunk
+[Quidway-XGigabitEthernet0/0/4] port trunk allow-pass vlan 3
+[Quidway-XGigabitEthernet0/0/4] quit
+
+步骤2 验证配置结果
+部门1、部门2 所属的VLAN2 内的任一台主机ping 部门3、部门4 所属的VLAN3 内
+的任一台主机，无法ping 通，证明部门1、部门2 与部门3、部门4 已实现隔离。
+部门1 的任一台主机ping 部门2 的任一台主机，能ping 通，证明部门1 与部门2 已实
+现互通。
+部门3 的任一台主机ping 部门4 的任一台主机，能ping 通，证明部门3 与部门4 已实
+现互通。
+----结束

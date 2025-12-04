@@ -1,0 +1,58 @@
+配置思路
+采用如下的思路配置VLAN 间通过VLANIF 接口通信：
+1. 在交换机上创建VLAN，确定用户所属的VLAN。
+2. 在交换机上配置允许用户所属的VLAN 通过当前二层端口。
+3. 在三层交换机上创建VLANIF 接口并配置IP 地址，实现三层互通。
+说明
+为了成功实现VLAN 间互通，VLAN 内主机的缺省网关必须是对应VLANIF 接口的IP 地址。
+数据准备
+为完成此配置例，需准备如下的数据：
+l 在Switch 上配置接口XGE0/0/1 加入VLAN10 和VLAN20。
+l 在Switch 上配置VLANIF10 的IP 地址为10.10.10.1/24。
+l 在Switch 上配置VLANIF20 的IP 地址为20.20.20.1/24。
+l 在SwitchA 上配置接口XGE0/0/1 加入VLAN10 和VLAN20。
+l 在SwitchA 上配置接口XGE0/0/2 加入VLAN10。
+l 在SwitchA 上配置接口XGE0/0/3 加入VLAN20。
+操作步骤
+步骤1 配置Switch
+# 创建VLAN
+<Quidway> system-view
+[Quidway] vlan batch 10 20
+# 配置接口加入VLAN
+[Quidway] interface xgigabitethernet 0/0/1
+[Quidway-XGigabitEthernet0/0/1] port link-type trunk
+[Quidway-XGigabitEthernet0/0/1] port trunk allow-pass vlan 10 20
+[Quidway-XGigabitEthernet0/0/1] quit
+
+# 配置VLANIF 接口的IP 地址
+[Quidway] interface vlanif 10
+[Quidway-Vlanif10] ip address 10.10.10.1 24
+[Quidway-Vlanif10] quit
+[Quidway] interface vlanif 20
+[Quidway-Vlanif20] ip address 20.20.20.1 24
+[Quidway-Vlanif20] quit
+
+步骤2 配置SwitchA
+# 创建VLAN
+<Quidway> system-view
+[Quidway] vlan batch 10 20
+
+# 配置接口加入VLAN
+[Quidway] interface xgigabitethernet 0/0/1
+[Quidway-XGigabitEthernet0/0/1] port link-type trunk
+[Quidway-XGigabitEthernet0/0/1] port trunk allow-pass vlan 10 20
+[Quidway-XGigabitEthernet0/0/1] quit
+[Quidway] interface xgigabitethernet 0/0/2
+[Quidway-XGigabitEthernet0/0/2] port link-type access
+[Quidway-XGigabitEthernet0/0/2] port default vlan 10
+[Quidway-XGigabitEthernet0/0/2] quit
+[Quidway] xgigabitethernet 0/0/3
+[Quidway-XGigabitEthernet0/0/2] port link-type access
+[Quidway-XGigabitEthernet0/0/2] port default vlan 20
+[Quidway-XGigabitEthernet0/0/3] quit
+
+步骤3 检查配置结果
+在VLAN10 中的PC1 上配置缺省网关为VLANIF10 接口的IP 地址10.10.10.1/24。
+在VLAN20 中的PC2 上配置缺省网关为VLANIF20 接口的IP 地址20.20.20.1/24。
+配置完成后，VLAN10 内的PC1 与VLAN20 内的PC2 能够相互访问。
+----结束

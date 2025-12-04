@@ -1,0 +1,11 @@
+#
+
+sys
+vlan batch 10 20 30 40 50 60 70 80	
+port-group group-member GigabitEthernet 0/0/1 to GigabitEthernet 0/0/4
+	port link-type trunk 
+	port trunk allow-pass vlan all
+	q
+q
+save
+y

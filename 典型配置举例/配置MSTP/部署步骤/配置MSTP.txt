@@ -1,0 +1,225 @@
+配置思路
+采用如下的思路配置MSTP 的基本功能：
+
+1. 将SwitchA 和SwitchC 配置到一个域内，域名为RG1，创建实例1。
+2. 将SwitchB 和SwitchD 配置到另外一个域，域名为RG2，创建实例1。
+3. 配置交换机SwitchA 为CIST 总根。
+4. 在域RG1 内，交换机SwitchA 为CIST 域根，SwitchA 为实例1 的域根。在
+SwitchA 的XGE0/0/2 和XGE0/0/1 上应用根保护功能。
+5. 在域RG2 内，交换机SwitchB 为CIST 域根，SwitchD 为实例1 的域根。
+6. SwitchC 和SwitchD 的XGE0/0/1 与PC 机相连，设置为边缘端口，同时在SwitchC
+和SwitchD 上应用BPDU 保护功能。
+7. 在SwitchA、SwitchB、SwitchC 和SwitchD 使用华为私有计算方法计算路径开销。
+数据准备
+
+为完成此配置例，需准备如下的数据：
+l SwitchA 和SwitchC 的域名为RG1
+l SwitchB 和SwitchD 的域名为RG2
+l 各XGE 端口号如图1-26 所示
+l VLAN 号是1 ～ 20
+操作步骤
+
+步骤1 配置交换机SwitchA
+# 配置SwitchA 的MST 域。
+<SwitchA> system-view
+[SwitchA] stp region-configuration
+[SwitchA-mst-region] region-name RG1
+[SwitchA-mst-region] instance 1 vlan 1 to 10
+# 激活域配置。
+[SwitchA-mst-region] active region-configuration
+[SwitchA-mst-region] quit
+# 配置SwitchA 在实例0 中的优先级为0，保证SwitchA 作为CIST 的总根。
+[SwitchA] stp instance 0 priority 0
+# 配置SwitchA 在实例1 中的优先级为0，保证SwitchA 作为实例1 的域根。
+[SwitchA] stp instance 1 priority 0
+# 配置端口路径开销的计算方法为华为私有计算方法。
+[SwitchA] stp pathcost-standard legacy
+# 创建VLAN 2 到20。
+[SwitchA] vlan batch 2 to 20
+# 将XGE0/0/2 加入VLAN。
+[SwitchA] interface XGigabitEthernet 0/0/2
+[SwitchA-XGigabitEthernet0/0/2] port link-type trunk
+[SwitchA-XGigabitEthernet0/0/2] port trunk allow-pass vlan 1 to 20
+[SwitchA-XGigabitEthernet0/0/2] bpdu enable
+[SwitchA-XGigabitEthernet0/0/2] quit
+# 将XGE0/0/1 加入VLAN。
+[SwitchA] interface XGigabitEthernet 0/0/1
+[SwitchA-XGigabitEthernet0/0/1] port link-type trunk
+[SwitchA-XGigabitEthernet0/0/1] port trunk allow-pass vlan 1 to 20
+[SwitchA-XGigabitEthernet0/0/1] bpdu enable
+[SwitchA-XGigabitEthernet0/0/1] quit
+# 在XGE0/0/1 上启动根保护。
+[SwitchA] interface XGigabitEthernet 0/0/1
+[SwitchA-XGigabitEthernet0/0/1] stp root-protection
+[SwitchA-XGigabitEthernet0/0/1] quit
+# 在XGE0/0/2 上启动根保护。
+[SwitchA] interface XGigabitEthernet 0/0/2
+[SwitchA-XGigabitEthernet0/0/2] stp root-protection
+[SwitchA-XGigabitEthernet0/0/2] quit
+# 启动MSTP。
+[SwitchA] stp enable
+步骤2 配置交换机SwitchB
+# 配置SwitchB 的MST 域。
+[SwitchB] stp region-configuration
+[SwitchB-mst-region] region-name RG2
+[SwitchB-mst-region] instance 1 vlan 1 to 10
+# 激活域配置。
+[SwitchB-mst-region] active region-configuration
+[SwitchB-mst-region] quit
+# 配置SwitchB 在实例0 中的优先级为4096，保证SwitchB 作为CIST 的域根。
+[SwitchB] stp instance 0 priority 4096
+# 配置端口路径的开销计算方法为华为私有计算方法。
+[SwitchB] stp pathcost-standard legacy
+# 创建VLAN 2 到20。
+[SwitchB] vlan batch 2 to 20
+# 将XGE0/0/1 加入VLAN。
+[SwitchB] interface XGigabitEthernet 0/0/1
+[SwitchB-XGigabitEthernet0/0/1] port link-type trunk
+[SwitchB-XGigabitEthernet0/0/1] port trunk allow-pass vlan 1 to 20
+[SwitchB-XGigabitEthernet0/0/1] bpdu enable
+[SwitchB-XGigabitEthernet0/0/1] quit
+# 将XGE0/0/2 加入VLAN。
+[SwitchB] interface XGigabitEthernet 0/0/2
+[SwitchB-XGigabitEthernet0/0/2] port link-type trunk
+[SwitchB-XGigabitEthernet0/0/2] port trunk allow-pass vlan 1 to 20
+[SwitchB-XGigabitEthernet0/0/2] bpdu enable
+[SwitchB-XGigabitEthernet0/0/2] quit
+Quidway S6700 系列以太网交换机
+典型配置举例1 以太网配置
+文档版本 02 (2011-07-15) 华为专有和保密信息
+版权所有 © 华为技术有限公司
+75
+# 启动MSTP。
+[SwitchB] stp enable
+步骤3 配置SwitchC
+# 配置SwitchC 的MST 域。
+[SwitchC] stp region-configuration
+[SwitchC-mst-region] region-name RG1
+[SwitchC-mst-region] instance 1 vlan 1 to 10
+# 激活域配置。
+[SwitchC-mst-region] active region-configuration
+[SwitchC-mst-region] quit
+# 配置端口路径开销的计算方法为华为私有计算方法。
+[SwitchC] stp pathcost-standard legacy
+# 启动BPDU 保护功能
+[SwitchC] stp bpdu-protection
+# 创建VLAN 2 到20。
+[SwitchC] vlan batch 2 to 20
+# 将XGE0/0/2 加入VLAN。
+[SwitchC] interface XGigabitEthernet 0/0/2
+[SwitchC-XGigabitEthernet0/0/2] port link-type trunk
+[SwitchC-XGigabitEthernet0/0/2] port trunk allow-pass vlan 1 to 20
+[SwitchC-XGigabitEthernet0/0/2] bpdu enable
+[SwitchC-XGigabitEthernet0/0/2] quit
+# 将XGE0/0/3 加入VLAN。
+[SwitchC] interface XGigabitEthernet 0/0/3
+[SwitchC-XGigabitEthernet0/0/3] port link-type trunk
+[SwitchC-XGigabitEthernet0/0/3] port trunk allow-pass vlan 1 to 20
+[SwitchC-XGigabitEthernet0/0/3] bpdu enable
+[SwitchC-XGigabitEthernet0/0/3] quit
+# 将XGE0/0/1 配置成边缘端口。
+[SwitchC] interface XGigabitEthernet 0/0/1
+[SwitchC-XGigabitEthernet0/0/1] stp edged-port enable
+[SwitchC-XGigabitEthernet0/0/1] port hybrid pvid vlan 20
+[SwitchC-XGigabitEthernet0/0/1] port hybrid untagged vlan 20
+[SwitchC-XGigabitEthernet0/0/1] quit
+# 启动MSTP。
+[SwitchC] stp enable
+步骤4 配置SwitchD
+# 配置SwitchD 的MST 域。
+[SwitchD] stp region-configuration
+[SwitchD-mst-region] region-name RG2
+[SwitchD-mst-region] instance 1 vlan 1 to 10
+# 激活域配置。
+[SwitchD-mst-region] active region-configuration
+[SwitchD-mst-region] quit
+Quidway S6700 系列以太网交换机
+典型配置举例1 以太网配置
+文档版本 02 (2011-07-15) 华为专有和保密信息
+版权所有 © 华为技术有限公司
+76
+# 配置SwitchD 在实例1 中的优先级为0，保证SwitchD 作为实例1 的域根。
+[SwitchD] stp instance 1 priority 0
+# 配置端口路径开销的计算方法为华为私有计算方法。
+[SwitchD] stp pathcost-standard legacy
+# 启动BPDU 保护功能。
+[SwitchD] stp bpdu-protection
+# 创建VLAN 2 到20。
+[SwitchD] vlan batch 2 to 20
+# 将XGE0/0/2 加入VLAN。
+[SwitchD] interface XGigabitEthernet 0/0/2
+[SwitchD-XGigabitEthernet0/0/2] port link-type trunk
+[SwitchD-XGigabitEthernet0/0/2] port trunk allow-pass vlan 1 to 20
+[SwitchD-XGigabitEthernet0/0/2] bpdu enable
+[SwitchD-XGigabitEthernet0/0/2] quit
+# 将XGE0/0/3 加入VLAN。
+[SwitchD] interface XGigabitEthernet 0/0/3
+[SwitchD-XGigabitEthernet0/0/3] port link-type trunk
+[SwitchD-XGigabitEthernet0/0/3] port trunk allow-pass vlan 1 to 20
+[SwitchD-XGigabitEthernet0/0/3] bpdu enable
+[SwitchD-XGigabitEthernet0/0/3] quit
+# 将XGE0/0/1 配置成边缘端口。
+[SwitchD] interface XGigabitEthernet 0/0/1
+[SwitchD-XGigabitEthernet0/0/1] stp edged-port enable
+[SwitchD-XGigabitEthernet0/0/1] port hybrid pvid vlan 10
+[SwitchD-XGigabitEthernet0/0/1] port hybrid untagged vlan 10
+[SwitchD-XGigabitEthernet0/0/1] quit
+# 启动MSTP。
+[SwitchD] stp enable
+步骤5 验证配置结果
+经过以上配置，在网络计算稳定后，执行以下操作，验证配置结果。
+# 在SwitchA 上执行display stp brief 命令，查看端口状态和端口的保护类型，结果如
+下：
+<SwitchA> display stp brief
+MSTID Port Role STP State Protection
+0 XGigabitEthernet0/0/1 DESI FORWARDING ROOT
+0 XGigabitEthernet0/0/2 DESI FORWARDING ROOT
+1 XGigabitEthernet0/0/1 DESI FORWARDING ROOT
+1 XGigabitEthernet0/0/2 DESI FORWARDING ROOT
+由于交换机SwitchA 在CIST 内优先级最高，所以SwitchA 被选择为CIST 总根，同时
+它也是RG1 的域根。SwitchA 的XGE0/0/2 和XGE0/0/1 在CIST 上都是指定端口。
+交换机SwitchA 实例1 上的优先级在域RG1 内最高，所以SwitchA 被选择为实例1 的
+域根。XGE0/0/2 和XGE0/0/1 在实例1 上都被计算为指定端口。
+# 在SwitchC 上执行display stp interface brief 命令，结果如下：
+<SwitchC> display stp interface XGigabitEthernet 0/0/3 brief
+MSTID Port Role STP State Protection
+Quidway S6700 系列以太网交换机
+典型配置举例1 以太网配置
+文档版本 02 (2011-07-15) 华为专有和保密信息
+版权所有 © 华为技术有限公司
+77
+0 XGigabitEthernet0/0/3 ROOT FORWARDING NONE
+1 XGigabitEthernet0/0/3 ROOT FORWARDING NONE
+<SwitchC> display stp interface XGigabitEthernet 0/0/2 brief
+MSTID Port Role STP State Protection
+0 XGigabitEthernet0/0/2 DESI FORWARDING NONE
+1 XGigabitEthernet0/0/2 DESI FORWARDING NONE
+SwitchC 的XGE0/0/3 在CIST 和实例1 中为根端口。SwitchC 的另一个XGE0/0/2，在
+CIST 和实例1 中都是指定端口。
+# 在交换机SwitchB 上执行display stp brief 命令，结果如下：
+<SwitchB> display stp brief
+MSTID Port Role STP State Protection
+0 XGigabitEthernet0/0/1 DESI FORWARDING NONE
+0 XGigabitEthernet0/0/2 ROOT FORWARDING NONE
+1 XGigabitEthernet0/0/1 ROOT FORWARDING NONE
+1 XGigabitEthernet0/0/2 MAST FORWARDING NONE
+交换机SwitchB 在CIST 上的优先级低于SwitchA，XGE0/0/2 在CIST 被计算为根端
+口。同时因为SwitchA 和SwitchB 不属于同一个域，所以XGE0/0/2 在实例1 上被计算
+为Master 端口。在实例1 中，SwitchB 的优先级低于SwitchD，所以XGE0/0/1 被计算
+为根端口。SwitchB 在CIST 中的优先级高于SwitchD，XGE0/0/1 在CIST 被计算为指定
+端口。
+# 在SwitchD 上执行display stp interface brief 命令，结果如下：
+<SwitchD> display stp interface XGigabitEthernet 0/0/3 brief
+MSTID Port Role STP State Protection
+0 XGigabitEthernet0/0/3 ROOT FORWARDING NONE
+1 XGigabitEthernet0/0/3 DESI FORWARDING NONE
+<SwitchD> display stp interface XGigabitEthernet 0/0/2 brief
+MSTID Port Role STP State Protection
+0 XGigabitEthernet0/0/2 ALTE DISCARDING NONE
+1 XGigabitEthernet0/0/2 ALTE DISCARDING NONE
+因为SwitchD 的XGE0/0/2 在CIST 上为Alternate 端口，又因为SwitchD 与SwitchC 不
+在同一个域，所以XGE0/0/2 在实例1 中的也被选择为Alternate 端口。
+XGE0/0/3 在CIST 为根端口，因为SwitchD 在实例1 中的优先级比SwitchB 高，所以
+XGE0/0/3 在实例1 上被作为指定端口。
+----结束
+配置

@@ -1,0 +1,110 @@
+#HX-SW01
+
+sys
+
+interface Vlanif 10
+	ip add 192.168.10.252 24
+	vrrp vrid 1 virtual-ip 192.168.10.254
+	vrrp vrid 1 priority 130
+	quit
+
+interface Vlanif 20
+	ip add 192.168.20.252 24
+	vrrp vrid 2 virtual-ip 192.168.20.254
+	vrrp vrid 2 priority 130
+	quit
+
+interface Vlanif 30
+	ip add 192.168.30.252 24
+	vrrp vrid 3 virtual-ip 192.168.30.254
+	vrrp vrid 3 priority 130
+	quit
+
+interface Vlanif 40
+	ip add 192.168.40.252 24
+	vrrp vrid 4 virtual-ip 192.168.40.254
+	vrrp vrid 4 priority 130
+	quit
+
+interface Vlanif 50
+	ip add 192.168.50.252 24
+	vrrp vrid 5 virtual-ip 192.168.50.254
+	quit
+
+interface Vlanif 60
+	ip add 192.168.60.252 24
+	vrrp vrid 6 virtual-ip 192.168.60.254
+	quit
+
+interface Vlanif 70
+	ip add 192.168.70.252 24
+	vrrp vrid 7 virtual-ip 192.168.70.254
+	quit
+
+interface Vlanif 80
+	ip add 192.168.80.252 24
+	vrrp vrid 8 virtual-ip 192.168.80.254
+	quit
+
+quit
+save
+y
+
+#HX-SW02
+
+sys
+
+interface Vlanif 10
+	ip add 192.168.10.253 24
+	vrrp vrid 1 virtual-ip 192.168.10.254
+	quit
+
+interface Vlanif 20
+	ip add 192.168.20.253 24
+	vrrp vrid 2 virtual-ip 192.168.20.254
+	quit
+
+interface Vlanif 30
+	ip add 192.168.30.253 24
+	vrrp vrid 3 virtual-ip 192.168.30.254
+	quit
+
+interface Vlanif 40
+	ip add 192.168.40.253 24
+	vrrp vrid 4 virtual-ip 192.168.40.254
+	quit
+
+interface Vlanif 50
+	ip add 192.168.50.253 24
+	vrrp vrid 5 virtual-ip 192.168.50.254
+	vrrp vrid 5 priority 130
+	quit
+
+interface Vlanif 60
+	ip add 192.168.60.253 24
+	vrrp vrid 6 virtual-ip 192.168.60.254
+	vrrp vrid 6 priority 130
+	quit
+
+interface Vlanif 70
+	ip add 192.168.70.253 24
+	vrrp vrid 7 virtual-ip 192.168.70.254
+	vrrp vrid 7 priority 130
+	quit
+
+interface Vlanif 80
+	ip add 192.168.80.253 24
+	vrrp vrid 8 virtual-ip 192.168.80.254
+	vrrp vrid 8 priority 130
+	quit
+
+quit
+save
+y
+
+
+
+
+
+
+

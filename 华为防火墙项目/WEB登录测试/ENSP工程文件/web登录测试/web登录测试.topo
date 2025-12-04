@@ -27,27 +27,27 @@
                 <interfaceMap sztype="Ethernet" interfacename="Ethernet" displayNo="2" remoteDisplayNo="1" adapterUid="\Device\NPF_{1CA57375-B3A6-4C0A-9CB1-D7FB1E9BDEA5}" isOpen="1" udpPort="0" peerIPAdd="0.0.0.0" peerIP="0" peerPort="0" />
             </slot>
         </dev>
-        <dev id="F1054DC0-CA8B-40b2-876B-7E711F6669C7" name="Client2" poe="0" model="Client" settings="-domain 0 -eth 54-89-98-84-28-EA -ipaddr 192.168.2.3 -ipmask 255.255.255.0 -gateway 192.168.2.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-F9-1D-57" com_port="0" bootmode="0" cx="470.000000" cy="911.000000" edit_left="497" edit_top="965">
+        <dev id="F1054DC0-CA8B-40b2-876B-7E711F6669C7" name="Client2" poe="0" model="Client" settings="-domain 0 -eth 54-89-98-84-28-EA -ipaddr 192.168.2.3 -ipmask 255.255.255.0 -gateway 192.168.2.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-6B-7D-31" com_port="0" bootmode="0" cx="470.000000" cy="911.000000" edit_left="497" edit_top="965">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
         </dev>
-        <dev id="F17ADEEF-6545-4b93-9930-94B26B0C3A94" name="Client1" poe="0" model="Client" settings="-domain 0 -eth 54-89-98-BD-15-F0 -ipaddr 192.168.2.2 -ipmask 255.255.255.0 -gateway 192.168.2.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-C6-32-D7" com_port="0" bootmode="0" cx="470.000000" cy="764.000000" edit_left="497" edit_top="818">
+        <dev id="F17ADEEF-6545-4b93-9930-94B26B0C3A94" name="Client1" poe="0" model="Client" settings="-domain 0 -eth 54-89-98-BD-15-F0 -ipaddr 192.168.2.2 -ipmask 255.255.255.0 -gateway 192.168.2.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-D0-12-6F" com_port="0" bootmode="0" cx="470.000000" cy="764.000000" edit_left="497" edit_top="818">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
         </dev>
-        <dev id="C8DB2E92-C646-4ebb-8205-C3EB5BFABAB1" name="Server1" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-91-1D-A2 -ipaddr 202.1.1.2 -ipmask 255.255.255.0 -gateway 202.1.1.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-5E-32-95" com_port="0" bootmode="0" cx="1085.000000" cy="778.000000" edit_left="1162" edit_top="796">
+        <dev id="C8DB2E92-C646-4ebb-8205-C3EB5BFABAB1" name="Server1" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-91-1D-A2 -ipaddr 202.1.1.2 -ipmask 255.255.255.0 -gateway 202.1.1.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-36-28-AC" com_port="0" bootmode="0" cx="1085.000000" cy="778.000000" edit_left="1162" edit_top="796">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
         </dev>
-        <dev id="18262181-51D9-4ef4-A954-A29B22DD3A54" name="Server2" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-9D-6F-9A -ipaddr 100.1.1.2 -ipmask 255.255.255.0 -gateway 100.1.1.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-C7-72-9A" com_port="0" bootmode="0" cx="1084.000000" cy="1045.000000" edit_left="1174" edit_top="1070">
+        <dev id="18262181-51D9-4ef4-A954-A29B22DD3A54" name="Server2" poe="0" model="Server" settings="-domain 0 -eth 54-89-98-9D-6F-9A -ipaddr 100.1.1.2 -ipmask 255.255.255.0 -gateway 100.1.1.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-CF-5D-6C" com_port="0" bootmode="0" cx="1084.000000" cy="1045.000000" edit_left="1174" edit_top="1070">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
         </dev>
-        <dev id="ABC6A480-752A-49e5-A142-38AF71ED2167" name="Client3" poe="0" model="Client" settings="-domain 0 -eth 54-89-98-36-37-76 -ipaddr 192.168.2.4 -ipmask 255.255.255.0 -gateway 192.168.2.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-60-67-97" com_port="0" bootmode="0" cx="470.000000" cy="1059.000000" edit_left="497" edit_top="1113">
+        <dev id="ABC6A480-752A-49e5-A142-38AF71ED2167" name="Client3" poe="0" model="Client" settings="-domain 0 -eth 54-89-98-36-37-76 -ipaddr 192.168.2.4 -ipmask 255.255.255.0 -gateway 192.168.2.1 -ipv6addr 2000::2 -ipv6gateway 2000::1 -prefixlen 64 -ipv4dns 0.0.0.0 -ipv6dns 3000::1 -dnslist NULL" system_mac="54-89-98-9A-08-E7" com_port="0" bootmode="0" cx="470.000000" cy="1059.000000" edit_left="497" edit_top="1113">
             <slot number="slot17" isMainBoard="1">
                 <interface sztype="Ethernet" interfacename="Ethernet" count="1" />
             </slot>
