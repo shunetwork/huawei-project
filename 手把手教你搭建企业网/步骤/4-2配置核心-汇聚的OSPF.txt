@@ -1,0 +1,96 @@
+# HX-SW01
+
+sys
+ospf 1 router-id 1.1.1.1
+	area 0
+		network 1.1.1.1 0.0.0.0
+		network 192.168.10.0 0.0.0.255
+		network 192.168.20.0 0.0.0.255
+		network 192.168.30.0 0.0.0.255
+		network 192.168.40.0 0.0.0.255
+		network 192.168.50.0 0.0.0.255
+		network 192.168.60.0 0.0.0.255        
+		network 192.168.70.0 0.0.0.255
+		network 192.168.80.0 0.0.0.255
+		network 192.168.100.0 0.0.0.255
+		network 192.168.101.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+# HX-SW02
+
+sys
+ospf 1 router-id 2.2.2.2
+	area 0
+		network 2.2.2.2 0.0.0.0
+		network 192.168.10.0 0.0.0.255
+		network 192.168.20.0 0.0.0.255
+		network 192.168.30.0 0.0.0.255
+		network 192.168.40.0 0.0.0.255
+		network 192.168.50.0 0.0.0.255
+		network 192.168.60.0 0.0.0.255        
+		network 192.168.70.0 0.0.0.255
+		network 192.168.80.0 0.0.0.255
+		network 192.168.100.0 0.0.0.255
+		network 192.168.101.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+# HJ-SW01
+
+sys
+ospf 1 router-id 3.3.3.3
+	area 0.0.0.0
+		network 3.3.3.3 0.0.0.0
+		network 192.168.100.0 0.0.0.255
+  		quit
+ 	quit
+quit
+save
+y
+
+
+# HJ-SW02
+
+sys
+ospf 1 router-id 4.4.4.4
+	area 0.0.0.0
+		network 4.4.4.4 0.0.0.0
+		network 192.168.100.0 0.0.0.255
+  		quit
+ 	quit
+quit
+save
+y
+
+# HJ-SW03
+
+sys
+ospf 1 router-id 5.5.5.5
+	area 0.0.0.0
+		network 5.5.5.5 0.0.0.0
+		network 192.168.100.0 0.0.0.255
+  		quit
+ 	quit
+quit
+save
+y
+
+# HJ-SW04
+
+sys
+ospf 1 router-id 6.6.6.6
+	area 0.0.0.0
+		network 6.6.6.6 0.0.0.0
+		network 192.168.100.0 0.0.0.255
+  		quit
+ 	quit
+quit
+save
+y

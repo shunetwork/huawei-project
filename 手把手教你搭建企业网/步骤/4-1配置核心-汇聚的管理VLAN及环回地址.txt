@@ -1,0 +1,101 @@
+# HX-SW01
+
+sys
+vlan 100
+	name manage
+	quit
+interface vlan 100
+	ip add 192.168.100.1 24
+	quit
+interface LoopBack 0
+	ip add 1.1.1.1 32
+	quit
+quit
+save
+y
+
+# HX-SW02
+
+sys
+vlan 100
+	name manage
+	quit
+interface vlan 100
+	ip add 192.168.100.2 24
+	quit
+interface LoopBack 0
+	ip add 2.2.2.2 32
+	quit
+quit
+dis ip int bri
+save
+y
+
+# HJ-SW01
+
+sys
+vlan 100
+	name manage
+	quit
+interface vlan 100
+	ip add 192.168.100.3 24
+	quit
+interface LoopBack 0
+	ip add 3.3.3.3 32
+	quit
+quit
+dis ip int bri
+save
+y
+
+# HJ-SW02
+
+sys
+vlan 100
+	name manage
+	quit
+interface vlan 100
+	ip add 192.168.100.4 24
+	quit
+interface LoopBack 0
+	ip add 4.4.4.4 32
+	quit
+quit
+dis ip int bri
+save
+y
+
+# HJ-SW03
+
+sys
+vlan 100
+	name manage
+	quit
+interface vlan 100
+	ip add 192.168.100.5 24
+	quit
+interface LoopBack 0
+	ip add 5.5.5.5 32
+	quit
+quit
+dis ip int bri
+save
+y
+
+# HJ-SW04
+
+sys
+vlan 100
+	name manage
+	quit
+interface vlan 100
+	ip add 192.168.100.6 24
+	quit
+interface LoopBack 0
+	ip add 6.6.6.6 32
+	quit
+quit
+dis ip int bri
+save
+y
+

@@ -1,0 +1,47 @@
+# HX-SW01 HX-SW02
+sys
+dhcp enable 
+
+interface vlan 10
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 20
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 30
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 40
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 50
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 60
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 70
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+interface vlan 80
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+quit
+save
+y

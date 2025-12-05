@@ -1,0 +1,26 @@
+# HX-SW01
+
+sys
+vlan 101
+interface Vlanif 101
+	ip add 192.168.101.253 24
+	quit
+quit
+save
+y
+
+# HX-SW02
+
+sys
+vlan 101
+interface Vlanif 101
+	ip add 192.168.101.254 24
+	quit
+interface GigabitEthernet 0/0/22
+	port link-type access 
+	port default vlan 101
+	quit
+quit
+save
+y
+

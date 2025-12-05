@@ -1,0 +1,118 @@
+# HX-SW01
+# 
+vlan 10 20 30 40 100 --> 主：HX-01  备：HX-02
+vlan 50 60 70 80 101 --> 备：HX-01  主：HX-02
+主：100 备：50 其余默认1
+
+sys
+int vlan 10
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 20
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 30
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 40
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 50
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 60
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 70
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 80
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 100
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 101
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+quit
+save
+y
+
+
+# HX-SW02
+
+sys
+int vlan 10
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 20
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 30
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 40
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 50
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 60
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 70
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 80
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+int vlan 100
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+int vlan 101
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+quit
+save
+y
