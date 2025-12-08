@@ -1,0 +1,22 @@
+# DHCP
+
+sys
+ip pool vlan10
+	option 43 sub-option 1 ip-address 192.168.200.10
+	quit
+
+ip pool vlan30
+	option 43 sub-option 1 ip-address 192.168.200.10
+	quit
+
+ip pool vlan50
+	option 43 sub-option 1 ip-address 192.168.200.10
+	quit
+
+ip pool vlan70
+	option 43 sub-option 1 ip-address 192.168.200.10
+	quit
+
+quit
+save
+y

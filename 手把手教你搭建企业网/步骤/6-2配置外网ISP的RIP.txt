@@ -1,0 +1,55 @@
+# ISP-01
+
+sys
+rip 1
+	version 2      
+	undo summary       
+	network 202.113.110.0
+	network 202.113.112.0
+	network 202.113.113.0
+	silent-interface GigabitEthernet 0/0/0
+	quit
+quit
+save
+y
+
+# ISP-02
+
+sys
+rip 1
+	version 2
+	undo summary         
+	network 202.113.112.0
+	network 202.113.114.0
+	quit
+quit
+save
+y
+
+# ISP-03
+
+sys
+rip 1
+	version 2     
+	undo summary       
+	network 202.113.113.0
+	network 202.113.115.0
+	quit
+quit
+save
+y
+
+# ISP-04
+
+sys
+rip 1
+	version 2      
+	undo summary      
+	network 202.113.114.0
+	network 202.113.115.0
+	network 202.113.111.0
+	silent-interface GigabitEthernet 0/0/2
+	quit
+quit
+save
+y

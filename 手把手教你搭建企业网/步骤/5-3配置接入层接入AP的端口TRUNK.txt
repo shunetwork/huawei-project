@@ -1,0 +1,48 @@
+#JR-SW01	
+
+sys
+interface Ethernet 0/0/4
+	port link-type trunk 
+	port trunk allow-pass vlan all        
+	port trunk pvid vlan 10
+	quit
+quit
+save
+y
+
+#JR-SW03	
+
+sys
+interface Ethernet 0/0/4
+	port link-type trunk 
+	port trunk allow-pass vlan all        
+	port trunk pvid vlan 30
+	quit
+quit
+save
+y
+
+#JR-SW05	
+
+sys
+interface Ethernet 0/0/4
+	port link-type trunk 
+	port trunk allow-pass vlan all        
+	port trunk pvid vlan 50
+	quit
+quit
+save
+y
+
+
+#JR-SW07	
+
+sys
+interface Ethernet 0/0/4
+	port link-type trunk 
+	port trunk allow-pass vlan all        
+	port trunk pvid vlan 70
+	quit
+quit
+save
+y

@@ -1,0 +1,27 @@
+# HX-SW01
+
+sys
+ospf 1
+	area 0
+		network 192.168.200.0 0.0.0.255
+		ospf timer hello 4
+		ospf dr-priority 100
+		quit
+	quit
+quit
+save
+y
+
+# HX-SW02
+
+sys
+ospf 1
+	area 0
+		network 192.168.200.0 0.0.0.255
+		ospf timer hello 4
+		ospf dr-priority 50
+		quit
+	quit
+quit
+save
+y

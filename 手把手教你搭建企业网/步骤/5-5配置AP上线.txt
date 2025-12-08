@@ -1,0 +1,20 @@
+#AC
+
+sys
+capwap source ip-address 192.168.200.10
+	wlan
+		ap-id 1 ap-mac 00e0-fc5c-7530
+		quit
+	wlan
+		ap-id 2 ap-mac 00e0-fcbb-1ba0
+		quit
+	wlan
+		ap-id 3 ap-mac 00e0-fc35-2730
+		quit
+	wlan
+		ap-id 4 ap-mac 00e0-fcde-5650
+		quit
+	quit
+quit
+save
+y

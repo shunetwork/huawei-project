@@ -1,0 +1,61 @@
+# AC
+
+sys
+
+vlan pool wlan_pool
+	vlan 200
+quit
+
+wlan
+	regulatory-domain-profile name dxm_regulatory-domain-profile
+		country-code cn
+		quit
+
+	ap-group name dxm_ap-group-01
+		regulatory-domain-profile dxm_regulatory-domain-profile
+		quit
+
+	ap-id 1
+		ap-name ap01
+		ap-group dxm_ap-group-01
+		quit
+	
+	ap-id 2
+		ap-name ap02
+		ap-group dxm_ap-group-01
+		quit
+
+	ap-id 3
+		ap-name ap03
+		ap-group dxm_ap-group-01
+		quit
+
+	ap-id 4
+		ap-name ap04
+		ap-group dxm_ap-group-01
+		quit
+	
+	ssid-profile name ap-ssid-01
+		ssid dxm_wlan
+		quit
+
+	security-profile name security-profile-01
+		security wpa2 psk pass-phrase a12345678 aes
+		quit
+
+	vap-profile name vap01
+		ssid-profile ap-ssid-01
+		security-profile security-profile-01
+		service-vlan vlan-pool wlan_pool
+		quit
+
+	ap-group name dxm_ap-group-01
+		vap-profile vap01 wlan 1 radio 0
+		vap-profile vap01 wlan 1 radio 1
+
+	quit
+
+quit
+save
+y
+.

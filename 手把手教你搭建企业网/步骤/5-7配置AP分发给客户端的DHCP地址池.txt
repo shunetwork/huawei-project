@@ -1,0 +1,14 @@
+# DHCP
+
+sys
+ip pool vlan200
+	network 192.168.200.0 mask 255.255.255.0
+	gateway-list 192.168.200.254
+	dns-list 8.8.8.8
+	excluded-ip-address 192.168.200.1 192.168.200.10
+	excluded-ip-address 192.168.200.250 192.168.200.253
+	excluded-ip-address 192.168.200.254
+	quit
+quit
+save
+y

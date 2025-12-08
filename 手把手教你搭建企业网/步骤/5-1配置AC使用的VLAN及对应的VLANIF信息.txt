@@ -1,0 +1,53 @@
+#所有交换机
+
+sys
+vlan 200
+	quit
+quit
+save
+y
+
+# AC
+
+sys
+sysname AC
+int vlan 200
+	ip add 192.168.200.10 24
+	quit
+int g0/0/1
+	port link-type access
+	port default vlan 200
+	quit
+ip route-static 0.0.0.0 0.0.0.0 192.168.200.254
+ip route-static 0.0.0.0 0.0.0.0 192.168.200.253
+quit
+save
+y
+
+#无线网络中的Trunk连接
+场景：无线控制器（AC）与无线接入点（AP）之间常通过Trunk链路连接，AP的管理流量通常未标记，而多个SSID对应不同VLAN且带标记。
+解决方案：将Trunk的PVID设为AP管理VLAN，确保AP能正常被控制器管理。
+# HX-SW1
+
+sys
+int vlan 200
+	ip add 192.168.200.254 24
+	quit
+interface GigabitEthernet0/0/22
+	port link-type trunk
+	port trunk allow-pass vlan 1 200
+	port trunk pvid vlan 200
+	quit
+quit
+save
+y
+
+# HX-SW2
+
+sys
+int vlan 200
+	ip add 192.168.200.253 24
+	quit
+quit
+save
+y

@@ -116,3 +116,20 @@ int vlan 101
 quit
 save
 y
+
+
+# 接入层
+
+sys
+
+int vlan 100
+	ospf dr-priority 0
+	ospf timer hello 4
+	quit
+
+quit
+save
+y
+
+
+

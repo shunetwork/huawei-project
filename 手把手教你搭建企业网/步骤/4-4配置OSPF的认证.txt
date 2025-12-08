@@ -1,0 +1,12 @@
+#ºËÐÄ-»ã¾Û
+
+sys
+ospf 1
+	area 0
+		authentication-mode md5 12 cipher 123456
+		quit
+	quit
+quit
+save
+y
+

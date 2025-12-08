@@ -1,0 +1,28 @@
+# HX-SW01
+
+sys
+interface Vlanif 200
+	ip add 192.168.200.252 24
+	vrrp vrid 200 virtual-ip 192.168.200.254
+	vrrp vrid 200 priority 130
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+quit
+save
+y
+
+# HX-SW02
+
+sys
+interface Vlanif 200
+	ip add 192.168.200.253 24
+	vrrp vrid 200 virtual-ip 192.168.200.254
+	dhcp select relay         
+	dhcp relay server-ip 192.168.101.1
+	quit
+
+quit
+save
+y

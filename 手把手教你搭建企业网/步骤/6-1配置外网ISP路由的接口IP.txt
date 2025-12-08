@@ -1,0 +1,72 @@
+#ISP-AR01
+
+sys
+sysname ISP-AR01
+int g0/0/1
+	ip add 202.113.112.17 30
+	quit
+int g0/0/2
+	ip add 202.113.113.17 30
+	quit
+int g0/0/0
+	ip add 202.113.110.17 29
+	quit
+
+quit
+save
+y
+
+#ISP-AR02
+
+sys
+sysname ISP-AR02
+int g0/0/0 
+	ip add 202.113.112.18 30
+	quit
+int g0/0/1
+	ip add 202.113.114.17 30
+	quit
+quit
+save
+y
+
+#ISP-AR03
+
+sys
+sysname ISP-AR03
+int g0/0/0
+	ip add 202.113.113.18 30
+	quit
+int g0/0/1
+	ip add 202.113.115.17 30
+	quit
+quit
+save
+y
+
+#ISP-AR04
+
+sys
+sysname ISP-AR04
+int g0/0/0
+	ip add 202.113.114.18 30
+	quit
+int g0/0/1
+	ip add 202.113.115.18 30
+	quit
+int g0/0/2
+	ip add 202.113.111.17 30
+	quit
+quit
+save
+y
+		
+
+
+
+
+
+
+
+
+
