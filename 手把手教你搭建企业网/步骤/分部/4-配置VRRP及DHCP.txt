@@ -1,0 +1,13 @@
+#HX01
+
+sys
+
+sys
+interface Vlanif 90
+	ip add 192.168.90.254 24
+	vrrp vrid 9 virtual-ip 192.168.90.254
+	vrrp vrid 9 priority 130
+	quit
+quit
+save
+y

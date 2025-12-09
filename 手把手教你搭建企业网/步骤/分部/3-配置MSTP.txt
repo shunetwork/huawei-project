@@ -1,0 +1,19 @@
+#∫À–ƒº∞ª„æ€
+
+#≈‰÷√MSTP
+sys
+stp region-configuration         
+	region-name dxm
+	revision-level 10
+	instance 1 vlan 90 102
+	active region-configuration
+	quit
+quit
+save
+y
+
+#HX01
+stp instance 1 root primary   
+
+#HX02     
+stp instance 1 root secondary 

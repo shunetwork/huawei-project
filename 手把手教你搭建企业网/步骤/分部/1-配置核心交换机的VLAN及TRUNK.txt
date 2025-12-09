@@ -1,0 +1,44 @@
+#F-HX01
+
+sys
+sysname F-HX01
+vlan batch 90 102
+int Eth-Trunk 1
+	mode lacp-static
+	trunkport GigabitEthernet 0/0/23 to 0/0/24	 
+	q
+dis trunkmembership eth-trunk 1
+int eth-trunk 1
+	port link-type trunk 
+	port trunk allow-pass vlan 1 90 102
+	q
+int g0/0/2
+	port link-type trunk
+	port trunk allow-pass vlan 1 90 102
+	quit
+quit
+save
+y
+
+#F-HX02
+
+sys
+sysname F-HX02
+vlan batch 90 102
+int Eth-Trunk 1
+	trunkport GigabitEthernet 0/0/23 to 0/0/24
+	mode lacp-static 
+	q
+dis trunkmembership eth-trunk 1
+int eth-trunk 1
+	port link-type trunk 
+	port trunk allow-pass vlan 1 90 102
+	q
+int g0/0/2
+	port link-type trunk
+	port trunk allow-pass vlan 1 90 102
+	quit
+quit
+save
+y
+

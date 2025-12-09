@@ -1,0 +1,51 @@
+# HX-SW01
+
+sys
+int lo 0
+	ip add 7.7.7.7 255.255.255.255
+	quit
+int vlan 102
+	ip add 192.168.102.7
+	quit
+
+ospf 1 router-id 7.7.7.7
+	area 0.0.0.0
+		network 7.7.7.7 0.0.0.0
+		network 192.168.102.0 0.0.0.255
+ 		authentication-mode md5 12 cipher 123456
+		quit
+	quit
+
+int vlan 102
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+quit
+save
+y
+
+# HX-SW02
+
+sys
+int lo 0
+	ip add 8.8.8.8 255.255.255.255
+	quit
+int vlan 102
+	ip add 192.168.102.8 24
+	quit
+
+ospf 1 router-id 8.8.8.8
+	area 0.0.0.0
+		network 8.8.8.8 0.0.0.0
+		network 192.168.102.0 0.0.0.255
+ 		authentication-mode md5 12 cipher 123456
+		quit
+	quit
+
+int vlan 102
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+quit
+save
+y

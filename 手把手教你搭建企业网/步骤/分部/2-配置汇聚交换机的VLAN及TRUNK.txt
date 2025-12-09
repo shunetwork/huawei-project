@@ -1,0 +1,42 @@
+#F-HJS01
+
+sys
+sysname F-HJS01
+vlan batch 90 102
+int g0/0/1
+	port link-type trunk
+	port trunk allow vlan 90 102
+	quit
+int g0/0/3
+	port link-type trunk
+	port trunk allow vlan 90 102
+	quit
+int g0/0/2
+	port link-type access
+	port default vlan 90
+	quit
+quit
+save
+y
+
+
+#F-HJS02
+
+sys
+sysname F-HJS02
+vlan batch 90 102
+int g0/0/1
+	port link-type trunk
+	port trunk allow vlan 90 102
+	quit
+int g0/0/3
+	port link-type trunk
+	port trunk allow vlan 90 102
+	quit
+int g0/0/2
+	port link-type access
+	port default vlan 90
+	quit
+quit
+save
+y

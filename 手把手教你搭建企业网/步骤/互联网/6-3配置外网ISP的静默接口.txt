@@ -1,0 +1,2 @@
+[ISP-01-rip-1]silent-interface GigabitEthernet 0/0/0
+[ISP-04-rip-1]silent-interface GigabitEthernet 0/0/2
