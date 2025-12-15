@@ -1,0 +1,49 @@
+# R1
+
+sys
+sysname R1
+
+undo info enable
+int g0/0/0
+	ip add 10.0.123.1 24
+	quit
+int lo 0
+	ip add 10.0.1.1 24
+	quit
+quit
+save
+y
+
+
+# R2
+
+sys
+sysname R2
+
+undo info enable
+int g0/0/0
+	ip add 10.0.123.2 24
+	quit
+int lo 0
+	ip add 10.0.2.2 24
+	quit
+quit
+save
+y
+
+
+# R3
+
+sys
+sysname R3
+
+undo info enable
+int g0/0/0
+	ip add 10.0.123.3 24
+	quit
+int lo 0
+	ip add 10.0.3.3 24
+	quit
+quit
+save
+y
