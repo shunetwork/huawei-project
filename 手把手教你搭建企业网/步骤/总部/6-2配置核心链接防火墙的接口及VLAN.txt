@@ -1,0 +1,51 @@
+#HX-SW01
+
+sys
+
+vlan 103
+int g0/0/5
+	port link-type access 
+	port default vlan 103
+	quit
+
+int vlan 103
+	ip add 192.168.103.3 24
+	ospf dr-priority 100
+	ospf timer hello 4
+	quit
+
+ospf 1
+	area 0
+		network 192.168.103.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+
+#HX-SW02
+
+sys
+
+vlan 103
+int g0/0/5
+	port link-type access 
+	port default vlan 103
+	quit
+
+
+int vlan 103
+	ip add 192.168.103.4 24
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+ospf 1
+	area 0
+		network 192.168.103.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y

@@ -1,0 +1,33 @@
+#ZB-FW01
+
+admin
+Huawei@123
+
+sys
+interface GigabitEthernet 1/0/1      
+	vrrp vrid 110 virtual-ip 202.113.110.20 active
+	quit 
+interface GigabitEthernet 1/0/0      
+	vrrp vrid 103 virtual-ip 192.168.103.5 active
+	quit
+
+quit
+save
+y
+
+#ZB-FW02
+
+admin
+Huawei@123
+
+sys
+interface GigabitEthernet 1/0/1      
+	vrrp vrid 110 virtual-ip 202.113.110.20 standby
+	quit 
+interface GigabitEthernet 1/0/0      
+	vrrp vrid 103 virtual-ip 192.168.103.5 standby
+	quit
+
+quit
+save
+y

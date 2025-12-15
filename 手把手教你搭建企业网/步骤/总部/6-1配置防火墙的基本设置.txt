@@ -1,0 +1,73 @@
+# ZB-FW01
+
+
+admin
+Huawei@123
+
+sys
+sysname ZB-FW01
+undo info-center enable
+user-interface console 0	
+	idle-timeout 0 0
+	quit
+
+int g1/0/1
+	ip add 202.113.110.18 29
+	quit
+
+int g1/0/0
+	ip add 192.168.103.1 24
+	service-manage ping permit
+	quit
+
+int g1/0/6
+	ip add 192.168.66.1 24
+	service-manage ping permit
+	quit
+
+firewall zone trust        
+	add interface GigabitEthernet 1/0/0
+	add interface GigabitEthernet 1/0/6     
+firewall zone untrust       
+	add interface GigabitEthernet 1/0/1
+	quit
+quit
+save
+y
+
+
+# ZB-FW02
+
+admin
+Huawei@123
+
+sys
+sysname ZB-FW02
+undo info-center enable
+user-interface console 0	
+	idle-timeout 0 0
+	quit
+
+int g1/0/1
+	ip add 202.113.110.19 29
+	quit
+
+int g1/0/0
+	ip add 192.168.103.2 24
+	service-manage ping permit
+	quit
+
+int g1/0/6
+	ip add 192.168.66.2 24
+	service-manage ping permit
+	quit
+
+firewall zone trust        
+	add interface GigabitEthernet 1/0/0
+	add interface GigabitEthernet 1/0/6     
+firewall zone untrust       
+	add interface GigabitEthernet 1/0/1
+	quit
+quit
+save
+y

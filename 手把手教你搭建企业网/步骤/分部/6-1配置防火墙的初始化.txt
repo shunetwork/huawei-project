@@ -1,0 +1,38 @@
+# FB-FW01
+
+admin
+Huawei@123
+
+sys
+sysname FB-FW01
+undo info-center enable
+user-interface console 0	
+	idle-timeout 0 0
+	quit
+
+int g1/0/2
+	ip add 202.113.111.18 30
+	quit
+
+int g1/0/0
+	ip add 192.168.104.1 24
+	service-manage ping permit 
+	quit
+
+int g1/0/1
+	ip add 192.168.105.1 24
+	service-manage ping permit 
+	quit
+
+firewall zone trust        
+	add interface GigabitEthernet 1/0/0
+	add interface GigabitEthernet 1/0/1     
+firewall zone untrust       
+	add interface GigabitEthernet 1/0/2
+	quit
+
+quit
+save
+y
+
+

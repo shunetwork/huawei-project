@@ -1,0 +1,50 @@
+# F-HX01
+
+sys
+
+vlan 104
+int g0/0/1
+	port link-type access 
+	port default vlan 104
+	quit
+
+int vlan 104
+	ip add 192.168.104.2 24
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+ospf 1
+	area 0
+		network 192.168.104.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
+
+
+# F-HX02
+
+sys
+
+vlan 105
+int g0/0/1
+	port link-type access 
+	port default vlan 105
+	quit
+
+int vlan 105
+	ip add 192.168.105.2 24
+	ospf dr-priority 50
+	ospf timer hello 4
+	quit
+
+ospf 1
+	area 0
+		network 192.168.105.0 0.0.0.255
+		quit
+	quit
+quit
+save
+y
