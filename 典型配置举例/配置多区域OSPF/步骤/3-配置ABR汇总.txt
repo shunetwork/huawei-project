@@ -1,0 +1,13 @@
+# R3
+
+sys
+
+ospf 1
+	area 1
+		abr-summary 10.1.0.0 255.255.254.0
+		quit
+	quit
+quit
+
+save
+y
