@@ -1,0 +1,74 @@
+1、修改初始化密码
+
+admin
+Admin@123
+y
+Admin@123
+Huawei@123
+Huawei@123
+
+2、修改防火墙名称
+sysname FW1
+
+3、划分区域
+
+fire zone trust	
+	add interface g1/0/0
+	q
+
+fire zone dmz
+	add interface g1/0/2
+	q
+
+fire zone untrust
+	add interface g1/0/1
+	q
+
+4、配置IP
+
+int g1/0/0
+	ip add 10.1.1.1 24
+	q
+int g1/0/2
+	ip add 172.16.1.1 24
+	q
+int g1/0/1
+	ip add 11.1.1.1 24
+	q
+
+5、配置默认路由
+
+ip route-static 0.0.0.0 0 11.1.1.254
+
+6、配置NAT地址池
+
+nat address-group address-group10
+	mode no-pat global
+	section 0 11.1.1.10 11.1.1.20
+	q
+
+7、配置NAT策略
+
+nat-policy
+	rule name nat1
+	source-zone trust
+	destination-zone untrust
+	source-address 10.1.1.0 24
+	action source-nat address-group address-group10
+	q
+
+观察命令
+
+dis security-policy rule all
+
+8、配置安全策略
+
+security-policy
+ rule name to-isp
+  source-zone trust
+  destination-zone untrust
+  source-address 10.1.1.0 mask 255.255.255.0
+  action permit
+  q
+ q
+

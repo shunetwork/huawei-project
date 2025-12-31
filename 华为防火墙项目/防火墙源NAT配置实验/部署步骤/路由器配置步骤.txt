@@ -1,0 +1,16 @@
+1、修改主机名
+
+sysname R1
+
+2、配置IP
+
+int g0/0/1
+	ip add 11.1.1.254 24
+	q
+int g0/0/0
+	ip add 12.1.1.254 24
+	q
+
+q
+save
+y

@@ -1,0 +1,85 @@
+根据您的需求，华为防火墙（以主流版本的命令行格式为例）配置NAT主要有以下三种基本方式。每种方式都有其典型应用场景和配置示例。
+
+### 场景假设
+- **内网用户区**： VLAN 10， 网段 `192.168.1.0/24`， 接口 GE0/0/1
+- **出外网接口**： GE0/0/2， 公网IP `1.1.1.1/30`
+- **NAT地址池**： `2.2.2.10` 到 `2.2.2.20` （假设为您拥有的公网IP段）
+
+---
+
+### 方式一：No-PAT（一对一NAT）
+**特点**： 只转换IP地址，不转换端口。一个私网IP固定映射为一个公网IP，适合服务器映射或需要固定公网地址的主机。
+**配置示例**：
+```
+# 1. 创建NAT地址池，模式为不转换端口(no-pat)
+nat address-group Server-NAT-Pool
+ mode no-pat        # 关键参数，表示一对一转换
+ section 0 2.2.2.10 2.2.2.10  # 假设将2.2.2.10固定映射给一台服务器
+
+# 2. 配置NAT策略
+nat-policy
+ rule name MAP-Server
+  source-zone trust
+  destination-zone untrust
+  source-address 192.168.1.100 32  # 内网服务器IP
+  action source-nat address-group Server-NAT-Pool
+```
+**典型场景**： 将内网IP为`192.168.1.100`的Web服务器，通过公网IP`2.2.2.10`对外提供服务。
+
+---
+
+### 方式二：NAPT（网络地址端口转换，最常用）
+**特点**： 同时转换IP地址和端口，多个私网IP共享一个公网IP地址池，通过端口号区分不同会话。这是企业员工上网最常用的方式。
+**配置示例**：
+```
+# 1. 创建NAT地址池，模式为端口转换(pat)
+nat address-group Employee-NAT-Pool
+ mode pat           # 关键参数，表示进行端口复用
+ section 0 2.2.2.11 2.2.2.20  # 一个地址池供所有员工共享
+
+# 2. 配置NAT策略
+nat-policy
+ rule name To-Internet
+  source-zone trust
+  destination-zone untrust
+  source-address 192.168.1.0 mask 255.255.255.0
+  action source-nat address-group Employee-NAT-Pool
+```
+**典型场景**： 内网`192.168.1.0/24`网段的所有员工，共享公网IP池`2.2.2.11-2.2.2.20`访问互联网。
+
+---
+
+### 方式三：Easy-IP
+**特点**： 是NAPT的一种特例，直接使用防火墙出接口的公网IP（即`1.1.1.1`）作为转换后的地址，无需单独定义地址池。最节省公网IP资源。
+**配置示例**：
+```
+# 无需创建地址池，直接在NAT策略中引用接口
+nat-policy
+ rule name Easy-IP-Example
+  source-zone trust
+  destination-zone untrust
+  source-address 192.168.1.0 mask 255.255.255.0
+  action source-nat easy-ip  # 关键命令，使用出接口IP做NAT
+```
+**典型场景**： 小型企业、家庭或分支机构，只有一个公网IP（`1.1.1.1`），内网所有用户通过这个唯一的IP访问互联网。
+
+### 重要说明：安全策略与NAT的协同
+无论采用以上哪种NAT方式，**都必须有相应的安全策略允许该流量通过**，NAT才能生效。这就是您图片中`to-isp`规则的作用。
+例如，对于上面的NAPT配置，必须有如下安全策略配合：
+```
+security-policy
+ rule name permit-to-internet
+  source-zone trust
+  destination-zone untrust
+  source-address 192.168.1.0 mask 255.255.255.0
+  action permit
+```
+
+### 总结与选择建议
+| 方式 | 命令关键词 | 地址转换关系 | 适用场景 |
+| :--- | :--- | :--- | :--- |
+| **No-PAT** | `mode no-pat` | 一对一，IP对IP | 服务器对外发布 |
+| **NAPT** | `mode pat` | 多对多，IP+端口转换 | 企业员工上网（有地址池） |
+| **Easy-IP** | `easy-ip` | 多对一，使用出接口IP | 小型网络（单出口IP） |
+
+您可以根据具体的网络规划和地址资源，选择最合适的一种或多种组合方式进行配置。

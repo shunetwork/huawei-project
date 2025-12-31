@@ -1,0 +1,48 @@
+# R1
+
+sys
+
+ospf 1 router-id 10.0.1.1
+	area 0
+		network 10.1.234.1 0.0.0.0
+	area 2
+		network 10.0.1.1 0.0.0.0
+interface LoopBack 0
+	ospf network-type broadcast
+
+# R2
+ospf 1 router-id 10.0.2.2
+	area 0
+		network 10.1.234.2 0.0.0.0
+		network 10.0.2.2 0.0.0.0
+interface LoopBack 0
+	ospf network-type broadcast
+
+# R4
+ospf 1 router-id 10.0.4.4
+	area 0
+		network 10.1.234.4 0.0.0.0
+		network 10.0.4.4 0.0.0.0
+interface LoopBack 0
+	ospf network-type broadcast
+
+
+# R3
+ospf 1 router-id 10.0.3.3
+	area 0
+		network 10.1.234.3 0.0.0.0
+		network 10.0.3.3 0.0.0.0
+	area 1
+		network 10.0.35.3 0.0.0.0
+		quit
+
+interface LoopBack 0
+	ospf network-type broadcast
+	quit
+
+
+# R5
+osp 1 router-id 10.0.5.5
+	area 1
+	network 10.0.35.5 0.0.0.0
+	quit
